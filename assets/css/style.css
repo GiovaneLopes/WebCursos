@@ -1,0 +1,94 @@
+.principalMenu {
+    position: sticky!important;
+    top: 0;
+    left: 0;
+    z-index: 2!important;
+}
+
+.container {
+    padding: 20px;
+    padding-top: 0px;
+    margin-top: 10px;
+}
+
+.carousel {
+    height: 350px;
+    overflow: hidden;
+}
+
+.carousel-item img {
+    height: 100%;
+}
+
+.principal-title {
+    margin-top: 15px;
+}
+
+.welcome {
+    font-size: 26px;
+}
+
+.our-courses {
+    font-size: 18px;
+}
+
+.courses-cards {
+    padding: 0px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.card {
+    margin: 10px 0px;
+}
+
+.card-title {
+    font-size: 16px;
+}
+
+.card-text {
+    font-size: 12px;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between!important;
+}
+
+.footer-nav {
+    position: fixed;
+    bottom: 0px;
+}
+
+.card-about {
+    width: 100%!important;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-body p {
+    text-align: justify;
+    font-size: 14px;
+}
+
+.about-title {
+    font-size: 20px;
+}
+
+.card-comments {
+    padding: 10px;
+    flex-direction: row!important;
+    align-items: center;
+}
+
+.card-comments img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+}
