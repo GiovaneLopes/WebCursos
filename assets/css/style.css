@@ -1,3 +1,12 @@
+* {
+    font-family: Roboto;
+}
+
+body {
+    background-image: url("../images/background-body.jpg");
+    background-size: 10%;
+}
+
 .principalMenu {
     position: sticky!important;
     top: 0;
@@ -5,11 +14,15 @@
     z-index: 2!important;
 }
 
+.navbar-nav {
+    font-size: 14px;
+}
+
 .container {
-    padding: 20px;
-    padding-top: 0px;
-    margin-top: 10px;
+    background-color: white;
     min-height: 100%!important;
+    padding: 0px!important;
+    margin-bottom: 15px;
 }
 
 .carousel {
@@ -22,7 +35,7 @@
 }
 
 .principal-title {
-    margin-top: 15px;
+    padding: 15px;
 }
 
 .welcome {
@@ -34,15 +47,23 @@
 }
 
 .courses-cards {
-    padding: 0px;
+    padding: 15px;
     display: flex;
     width: 100%;
     justify-content: space-between;
     flex-wrap: wrap;
 }
 
+.pagination-courses {
+    margin-top: 15px;
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
 .card {
     margin: 10px 0px;
+    box-shadow: .3px .3px 5px rgb(201, 200, 200);
 }
 
 .card-title {
@@ -71,10 +92,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
 }
 
 .card-body p {
-    text-align: justify;
+    text-align: center;
     font-size: 14px;
 }
 
@@ -85,7 +107,12 @@
 .card-comments {
     padding: 10px;
     flex-direction: row!important;
-    align-items: center;
+    align-items: start;
+}
+
+.text-comments {
+    display: flex;
+    align-items: start!important;
 }
 
 .card-comments img {
@@ -96,15 +123,4 @@
 
 .container-signin {
     min-height: 100vh!important;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: center;
-}
-
-form>* {
-    width: 40%;
 }
