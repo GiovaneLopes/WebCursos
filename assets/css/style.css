@@ -9,6 +9,7 @@
     padding: 20px;
     padding-top: 0px;
     margin-top: 10px;
+    min-height: 100%!important;
 }
 
 .carousel {
@@ -91,4 +92,19 @@
     width: 50px;
     height: 50px;
     border-radius: 50px;
+}
+
+.container-signin {
+    min-height: 100vh!important;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+form>* {
+    width: 40%;
 }
