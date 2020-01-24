@@ -16,6 +16,26 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <title>WebCursos - Sign on</title>
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
 </head>
 
 <body>
@@ -56,23 +76,34 @@
             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
         </div>
         <div class="courses-cards">
-            <form>
+            <form class="needs-validation" novalidate>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Name</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <input pattern=".{3,}" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                    <div class="invalid-feedback">
+                        Please digit your name, min length 3.
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                    <div class="invalid-feedback">
+                        Please digit your e-mail.
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
+                    <input pattern=".{8,}" type="password" class="form-control" id="exampleInputPassword1" required>
+                    <div class="invalid-feedback">
+                        Please digit your password, min length 8.
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Confirm Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
+                    <input pattern=".{8,}" type="password" class="form-control" id="exampleInputPassword1" required>
+                    <div class="invalid-feedback">
+                        Please confirm your password, min length 8.
+                    </div>
                 </div>
                 <div class="form-group form-check">
                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -80,27 +111,27 @@
                 </div>
                 <h6>Gender</h6>
                 <div class="custom-control custom-radio">
-                    <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                    <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" required>
                     <label class="custom-control-label" for="customRadio1">Male</label>
                 </div>
                 <div class="custom-control custom-radio">
-                    <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                    <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" required>
                     <label class="custom-control-label" for="customRadio2">Female</label>
                 </div>
                 <div class="custom-control custom-radio">
-                    <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
+                    <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input" required>
                     <label class="custom-control-label" for="customRadio3">Transsexual</label>
                 </div>
                 <div class="custom-control custom-radio">
-                    <input type="radio" id="customRadio4" name="customRadio" class="custom-control-input">
+                    <input type="radio" id="customRadio4" name="customRadio" class="custom-control-input" required>
                     <label class="custom-control-label" for="customRadio4">Not Binary</label>
                 </div>
                 <div class="custom-control custom-radio">
-                    <input type="radio" id="customRadio5" name="customRadio" class="custom-control-input">
+                    <input type="radio" id="customRadio5" name="customRadio" class="custom-control-input" required>
                     <label class="custom-control-label" for="customRadio5">Intersex</label>
                 </div>
                 <div class="custom-control custom-radio">
-                    <input type="radio" id="customRadio6" name="customRadio" class="custom-control-input">
+                    <input type="radio" id="customRadio6" name="customRadio" class="custom-control-input" required>
                     <label class="custom-control-label" for="customRadio6">Other</label>
                 </div>
                 <button type="submit" class="btn btn-success btn-account">Register</button>
