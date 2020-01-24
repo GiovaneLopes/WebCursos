@@ -16,6 +16,27 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <title>WebCursos - Tables</title>
+
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
 </head>
 
 <body>
@@ -69,27 +90,41 @@
                     <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                         <div class="card-body">
                             <div class="courses-cards acordion-form">
-                                <form id="course-form">
+                                <form class="needs-validation" novalidate id="course-form">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Name</label>
-                                        <input type="text" class="form-control" id="course-name" aria-describedby="emailHelp">
-                                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                        <input pattern=".{3,}" type="text" class="form-control" id="course-name" aria-describedby="emailHelp" required>
+                                        <div class="invalid-feedback">
+                                            Please digit course's name, min length 3.
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Requirement</label>
-                                        <input type="text" class="form-control" id="course-requirement">
+                                        <input pattern=".{3,}" type="text" class="form-control" id="course-requirement" required>
+                                        <div class="invalid-feedback">
+                                            Please digit course's requirement, min length 3.
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Menu</label>
-                                        <input type="text" class="form-control" id="course-menu">
+                                        <input pattern=".{3,}" type="text" class="form-control" id="course-menu" required>
+                                        <div class="invalid-feedback">
+                                            Please digit course's menu, min length 3.
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Workload</label>
-                                        <input type="text" class="form-control" id="course-workload">
+                                        <input pattern=".{3,}" type="text" class="form-control" id="course-workload" required>
+                                        <div class="invalid-feedback">
+                                            Please digit course's workload, min length 3.
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Price</label>
-                                        <input type="text" class="form-control" id="course-price">
+                                        <input pattern=".{3,}" type="text" class="form-control" id="course-price" required>
+                                        <div class="invalid-feedback">
+                                            Please digit course's price, min length 3.
+                                        </div>
                                     </div>
                                     <button type="submit" class="btn btn-success btn-account">Send</button>
                                 </form>
@@ -108,27 +143,41 @@
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                         <div class="card-body">
                             <div class="courses-cards acordion-form">
-                                <form id="teacher-form">
+                                <form class="needs-validation" novalidate id="teacher-form">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Name</label>
-                                        <input type="text" class="form-control" id="teacher-name" aria-describedby="emailHelp">
-                                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                        <input pattern=".{3,}" type="text" class="form-control" id="teacher-name" aria-describedby="emailHelp" required>
+                                        <div class="invalid-feedback">
+                                            Please digit teacher's name, min length 3.
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">E-mail</label>
-                                        <input type="email" class="form-control" id="teacher-email">
+                                        <input type="email" class="form-control" id="teacher-email" required>
+                                        <div class="invalid-feedback">
+                                            Please digit teacher's email.
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Salary</label>
-                                        <input type="text" class="form-control" id="teacher-salary">
+                                        <input pattern=".{3,}" type="text" class="form-control" id="teacher-salary" required>
+                                        <div class="invalid-feedback">
+                                            Please digit teacher's salary, min length 3.
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Login</label>
-                                        <input type="text" class="form-control" id="teacher-login">
+                                        <input pattern=".{3,}" type="text" class="form-control" id="teacher-login" required>
+                                        <div class="invalid-feedback">
+                                            Please digit teacher's login, min length 3.
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Password</label>
-                                        <input type="password" class="form-control" id="teacher-password">
+                                        <input pattern=".{8,}" type="password" class="form-control" id="teacher-password" required>
+                                        <div class="invalid-feedback">
+                                            Please digit teacher's password, min length 8.
+                                        </div>
                                     </div>
                                     <button type="submit" class="btn btn-success btn-account">Send</button>
                                 </form>
@@ -147,15 +196,20 @@
                     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                         <div class="card-body">
                             <div class="courses-cards acordion-form">
-                                <form id="registration-form">
+                                <form class="needs-validation" novalidate id="registration-form">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Registration Date</label>
-                                        <input type="date" class="form-control" id="registration-date" aria-describedby="emailHelp">
-                                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                        <input type="date" class="form-control" id="registration-date" aria-describedby="emailHelp" required>
+                                        <div class="invalid-feedback">
+                                            Please digit registration's start date.
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Test Score</label>
-                                        <input type="text" class="form-control" id="registration-score">
+                                        <input type="text" class="form-control" id="registration-score" required>
+                                        <div class="invalid-feedback">
+                                            Please digit registration's test score.
+                                        </div>
                                     </div>
                                     <button type="submit" class="btn btn-success btn-account">Send</button>
                                 </form>
@@ -174,19 +228,27 @@
                     <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
                         <div class="card-body">
                             <div class="courses-cards acordion-form">
-                                <form id="class-form">
+                                <form class="needs-validation" novalidate id="class-form">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Start Date</label>
-                                        <input type="date" class="form-control" id="class-start" aria-describedby="emailHelp">
-                                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                        <input type="date" class="form-control" id="class-start" aria-describedby="emailHelp" required>
+                                        <div class="invalid-feedback">
+                                            Please digit class's start date.
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">End Date</label>
-                                        <input type="date" class="form-control" id="class-end">
+                                        <input type="date" class="form-control" id="class-end" required>
+                                        <div class="invalid-feedback">
+                                            Please digit class's end date.
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Workload</label>
-                                        <input type="text" class="form-control" id="class-worload">
+                                        <input pattern=".{3,}" type="text" class="form-control" id="class-worload" required>
+                                        <div class="invalid-feedback">
+                                            Please digit class's workload, min length 3.
+                                        </div>
                                     </div>
                                     <button type="submit" class="btn btn-success btn-account">Send</button>
                                 </form>
@@ -205,19 +267,27 @@
                     <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
                         <div class="card-body">
                             <div class="courses-cards acordion-form">
-                                <form id="administrator-form">
+                                <form class="needs-validation" novalidate id="administrator-form">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Name</label>
-                                        <input type="text" class="form-control" id="administrator-name" aria-describedby="emailHelp">
-                                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                        <input pattern=".{3,}" type="text" class="form-control" id="administrator-name" aria-describedby="emailHelp" required>
+                                        <div class="invalid-feedback">
+                                            Please digit administrator's name, min length 3.
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Login</label>
-                                        <input type="text" class="form-control" id="administrator-login">
+                                        <input pattern=".{3,}" type="text" class="form-control" id="administrator-login" required>
+                                        <div class="invalid-feedback">
+                                            Please digit administrator's login, min length 3.
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Password</label>
-                                        <input type="password" class="form-control" id="administrator-password">
+                                        <input pattern=".{8,}" type="password" class="form-control" id="administrator-password" required>
+                                        <div class="invalid-feedback">
+                                            Please digit administrator's password, min length 8.
+                                        </div>
                                     </div>
                                     <button type="submit" class="btn btn-success btn-account">Send</button>
                                 </form>
@@ -236,47 +306,76 @@
                     <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
                         <div class="card-body">
                             <div class="courses-cards acordion-form">
-                                <form id="studant-form">
+                                <form class="needs-validation" novalidate id="studant-form">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Cpf</label>
-                                        <input type="text" class="form-control" id="studant-form" aria-describedby="emailHelp">
-                                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                        <input pattern=".{3,}" type="text" class="form-control" id="studant-form" aria-describedby="emailHelp" required>
+                                        <div class="invalid-feedback">
+                                            Please digit student's cpf, min length 3.
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Name</label>
-                                        <input type="text" class="form-control" id="studant-name">
+                                        <input pattern=".{3,}" type="text" class="form-control" id="studant-name" required>
+                                        <div class="invalid-feedback">
+                                            Please digit student's name, min length 3.
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">E-mail</label>
-                                        <input type="email" class="form-control" id="studant-email">
+                                        <input type="email" class="form-control" id="studant-email" required>
+                                        <div class="invalid-feedback">
+                                            Please digit student's email.
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Phone</label>
-                                        <input type="text" class="form-control" id="studant-phone">
+                                        <input pattern=".{3,}" type="text" class="form-control" id="studant-phone" required>
+                                        <div class="invalid-feedback">
+                                            Please digit student's phone, min length 3.
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Login</label>
-                                        <input type="text" class="form-control" id="studant-login">
+                                        <input pattern=".{3,}" type="text" class="form-control" id="studant-login" required>
+                                        <div class="invalid-feedback">
+                                            Please digit student's login, min length 3.
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Password</label>
-                                        <input type="password" class="form-control" id="studant-password">
+                                        <input pattern=".{8,}" type="password" class="form-control" id="studant-password" required>
+                                        <div class="invalid-feedback">
+                                            Please digit student's password, min length 8.
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Address</label>
-                                        <input type="text" class="form-control" id="studant-studant-address">
+                                        <input pattern=".{3,}" type="text" class="form-control" id="studant-studant-address" required>
+                                        <div class="invalid-feedback">
+                                            Please digit student's address, min length 3.
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">City</label>
-                                        <input type="text" class="form-control" id="studant-city">
+                                        <input pattern=".{3,}" type="text" class="form-control" id="studant-city" required>
+                                        <div class="invalid-feedback">
+                                            Please digit student's city, min length 3.
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Neighborhood</label>
-                                        <input type="text" class="form-control" id="studant-neighborhood">
+                                        <input pattern=".{3,}" type="text" class="form-control" id="studant-neighborhood" required>
+                                        <div class="invalid-feedback">
+                                            Please digit student's neighborhood, min length 3.
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">CEP</label>
-                                        <input type="text" class="form-control" id="studant-cep">
+                                        <input pattern=".{3,}" type="text" class="form-control" id="studant-cep" required>
+                                        <div class="invalid-feedback">
+                                            Please digit student's cep, min length 3.
+                                        </div>
                                     </div>
                                     <button type="submit" class="btn btn-success btn-account">Send</button>
 
