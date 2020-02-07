@@ -1,0 +1,250 @@
+* {
+    font-family: Roboto;
+}
+
+body {
+    background-image: url("../images/background-body.jpg");
+    background-size: 10%;
+}
+
+p {
+    font-size: 14px;
+    color: #4d4d4d;
+}
+
+label {
+    font-size: 14px;
+}
+
+.principalMenu {
+    position: sticky!important;
+    top: 0;
+    left: 0;
+    z-index: 2!important;
+}
+
+.navbar-nav {
+    font-size: 14px;
+}
+
+.container {
+    background-color: #f7f7f7;
+    min-height: 100%!important;
+    padding: 0px!important;
+    margin-bottom: 15px;
+}
+
+.container-register {
+    margin: 2rem;
+    width: 50%!important;
+    background-color: white;
+}
+
+.container-tables {
+    margin: 2rem;
+    width: 55%!important;
+}
+
+.carousel {
+    height: 350px;
+    overflow: hidden;
+}
+
+.carousel-item img {
+    height: 100%;
+}
+
+.principal-title {
+    padding: 15px;
+}
+
+.welcome {
+    font-size: 22px;
+}
+
+.our-courses {
+    font-size: 18px;
+}
+
+.btn-success {
+    background-color: transparent!important;
+    border: 1px solid green!important;
+    color: green!important;
+    padding: 2px 15px!important;
+}
+
+.btn-success:hover {
+    background-color: green!important;
+    border: 1px solid green!important;
+    color: white!important;
+}
+
+.btn-primary {
+    background-color: transparent!important;
+    border: 1px solid blue!important;
+    color: blue!important;
+    padding: 2px 15px!important;
+}
+
+.btn-primary:hover {
+    background-color: blue!important;
+    border: 1px solid blue!important;
+    color: white!important;
+}
+
+.btn-link {
+    color: grey!important;
+    background-color: white;
+}
+
+.badges {
+    margin-bottom: 5px;
+}
+
+.course-title {
+    margin-bottom: 5px!important;
+}
+
+.p-title {
+    font-size: 12px!important;
+}
+
+.courses-cards {
+    padding: 15px;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.pagination-courses {
+    margin-top: 15px;
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
+.card {
+    margin: 10px 0px;
+}
+
+.card-header {
+    background-color: white!important;
+}
+
+.card-title {
+    font-size: 14px;
+}
+
+.card-text {
+    font-size: 11px;
+    text-align: start!important;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between!important;
+}
+
+.footer-nav {
+    position: fixed;
+    bottom: 0px;
+}
+
+.card-about {
+    width: 100%!important;
+    margin-top: 0px;
+}
+
+.card-body-about {
+    align-items: center!important;
+}
+
+.text-about {
+    text-align: center!important;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+}
+
+.card-courses {
+    background-color: transparent!important;
+    border: none!important;
+}
+
+.card-body-courses {
+    padding-left: 0px!important;
+}
+
+.card-course-body {
+    padding: .5rem 1.25rem;
+    height: 125px;
+}
+
+.card-body p {
+    text-align: center;
+    font-size: 14px;
+}
+
+.about-title {
+    font-size: 20px;
+}
+
+.card-comments {
+    padding: 10px;
+    flex-direction: row!important;
+    align-items: start;
+}
+
+.text-comments {
+    display: flex;
+    align-items: start!important;
+}
+
+.card-comments img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+}
+
+.container-signin {
+    margin: 2rem;
+    min-height: 80vh!important;
+    width: 40%!important;
+    background-color: white;
+}
+
+.btn-account {
+    margin-top: 15px;
+}
+
+.accordion {
+    width: 100%!important;
+}
+
+.acordion-form {
+    justify-content: start!important;
+}
+
+@media screen and (max-width: 768px) {
+    #carouselExampleSlidesOnly {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .container-register {
+        width: 100%!important;
+    }
+}
+
+@media screen and (max-width: 680px) {
+    .container-signin,
+    .container-tables {
+        width: 100%!important;
+    }
+}
