@@ -62,6 +62,50 @@ public class AlunosDAO {
         return Alunos;
     }
     
+    public ArrayList<Alunos> getAlunosPendentes(){
+    	ArrayList resultado = new ArrayList();
+        try {            
+            Statement stmt = conexao.createStatement();
+
+            ResultSet rs = stmt.executeQuery("select * from alunos where aprovado = 'N'");
+
+            while( rs.next() ) {
+                Alunos alunos = new Alunos(); 
+                
+                alunos.setId(rs.getInt("id") );
+                alunos.setNome( rs.getString("nome") );
+
+                resultado.add(alunos);
+            }
+        } catch( SQLException e ) {
+            System.out.println("Erro de SQL: " + e.getMessage());
+        }
+        
+        return resultado;
+    }
+    
+    public Alunos getLogin(String email, String senha) {
+    	Alunos alunos = new Alunos();
+        try {
+            String sql = "SELECT * FROM alunos WHERE email = ? && senha = ?";
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setString(1, email);
+            ps.setString(2, senha);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            if ( rs.next() ) {
+                alunos.setId(rs.getInt("id"));
+                alunos.setNome( rs.getString("nome") );
+            }
+            
+        } catch( SQLException e ) {
+            System.out.println("Erro de SQL: " + e.getMessage());
+            return null;
+        }
+        return alunos;
+    }
+    
     public boolean gravar( Alunos Alunos ) {
         try {
             String sql;

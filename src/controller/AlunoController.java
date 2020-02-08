@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -46,21 +47,21 @@ public class AlunoController extends HttpServlet {
 	/**
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		AlunosDAO aluno = new AlunosDAO();
-		Alunos print;
-		ArrayList resultado = aluno.getLista();
-		PrintWriter out = response.getWriter();
-
-        out.println("<html>");
-        out.println("<body>");
-        for(int i=0; i < resultado.size(); i++) {
-        	print = (Alunos) resultado.get(i);
-        	out.print(print.getNome());
-        }
-        out.println("</body>");
-        out.println("</html>");
-	}
+//	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		AlunosDAO aluno = new AlunosDAO();
+//		Alunos print;
+//		ArrayList resultado = aluno.getLista();
+//		PrintWriter out = response.getWriter();
+//
+//        out.println("<html>");
+//        out.println("<body>");
+//        for(int i=0; i < resultado.size(); i++) {
+//        	print = (Alunos) resultado.get(i);
+//        	out.print(print.getNome());
+//        	out.print(print.getId());
+//        }
+//        doGet(request, response);
+//	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -68,6 +69,13 @@ public class AlunoController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		RequestDispatcher resposta = request.getRequestDispatcher("tables.html");
+		resposta.forward(request, response);
+		PrintWriter out = response.getWriter();
+
+        out.println("<html>");
+        out.println("<body>");
+        out.println("<p>Ola cheguei no doGet</p>");
 	}
 
 	/**

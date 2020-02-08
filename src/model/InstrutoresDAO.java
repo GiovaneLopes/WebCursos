@@ -62,6 +62,27 @@ public class InstrutoresDAO {
         return Instrutores;
     }
     
+    public Instrutores getLogin(String email, String senha) {
+    	Instrutores instrutores = new Instrutores();
+        try {
+            String sql = "SELECT * FROM instrutores WHERE email = ? && senha = ?";
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setString(1, email);
+            ps.setString(2, senha);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            if ( rs.next() ) {
+            	instrutores.setId(rs.getInt("id"));
+            	instrutores.setNome( rs.getString("nome") );
+            }
+            
+        } catch( SQLException e ) {
+            System.out.println("Erro de SQL: " + e.getMessage());
+        }
+        return instrutores;
+    }
+    
     public boolean gravar( Instrutores Instrutores ) {
         try {
             String sql;
