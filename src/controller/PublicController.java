@@ -55,7 +55,7 @@ public class PublicController extends HttpServlet {
 		aluno.setComentario(request.getParameter("comentario"));
 		
 		AlunosDAO alunoDAO = new AlunosDAO();
-		Boolean resultado = alunoDAO.gravar(aluno);
+		boolean resultado = alunoDAO.gravar(aluno);
 	}
 
 }

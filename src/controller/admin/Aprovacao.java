@@ -58,7 +58,7 @@ public class Aprovacao extends HttpServlet {
 			aluno.setComentario(request.getParameter("comentario"));
 			aluno.setAprovado('S');
 			
-			Boolean resultado = alunoDAO.gravar(aluno);
+			boolean resultado = alunoDAO.gravar(aluno);
 		} else {
 			alunoDAO.excluir(Integer.parseInt(request.getParameter("id")));
 		}

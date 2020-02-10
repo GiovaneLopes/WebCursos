@@ -1,6 +1,6 @@
 package utils;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Turmas {
     private int id;
@@ -49,8 +49,8 @@ public class Turmas {
 		return data_inicio;
 	}
 
-	public void setData_inicio(Date data_inicio) {
-		this.data_inicio = data_inicio;
+	public void setData_inicio(Date date) {
+		this.data_inicio = date;
 	}
 
 	public Date getData_final() {
