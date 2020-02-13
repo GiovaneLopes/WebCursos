@@ -155,17 +155,26 @@ public class AlunosDAO {
             String sql;
             if ( Alunos.getId() == 0 ) {
                 // Realizar uma inclus�o
-                sql = "INSERT INTO alunos (nome, idade) VALUES (?,?)";
+                sql = "INSERT INTO alunos (nome, cpf, celular, email, senha, login, endereco, cidade, bairro, cep) VALUES (?,?,?,?,?,?,?,?,?,?)";
             } else {
                 // Realizar uma altera��o
-                sql = "UPDATE alunos SET nome=?, idade=? WHERE id=?";
+                sql = "UPDATE alunos SET nome=?, cpf=?, celular=?, email=?, senha=?, login=?, endereco=?, cidade=?, bairro=?, cep=?, comentario=? WHERE id=?";
             }
             
             PreparedStatement ps = conexao.prepareStatement(sql);
             ps.setString(1, Alunos.getNome());
+            ps.setString(2, Alunos.getCpf());
+            ps.setString(3, Alunos.getCelular());
+            ps.setString(4, Alunos.getEmail());
+            ps.setString(5, Alunos.getSenha());
+            ps.setString(6, Alunos.getLogin());
+            ps.setString(7, Alunos.getEndereco());
+            ps.setString(8, Alunos.getCidade());
+            ps.setString(9, Alunos.getBairro());
+            ps.setString(10, Alunos.getCep());
             
             if ( Alunos.getId()> 0 )
-                ps.setInt(3, Alunos.getId());
+                ps.setString(11, Alunos.getComentario());
             
             ps.execute();
             

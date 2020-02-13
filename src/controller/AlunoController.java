@@ -97,6 +97,9 @@ public class AlunoController extends HttpServlet {
 		
 		AlunosDAO alunoDAO = new AlunosDAO();
 		boolean resultado = alunoDAO.gravar(aluno);
+		request.setAttribute("resultadoReq", resultado);
+		RequestDispatcher resposta = request.getRequestDispatcher("register.jsp");
+		resposta.forward(request, response);
 	}
 
 	/**

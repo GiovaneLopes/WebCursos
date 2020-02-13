@@ -22,29 +22,7 @@ public class LoginDAO {
         }
     }
     
-    public boolean doLogin(String tipoUser, String email, String senha) {
-    	switch(tipoUser) {
-    		case "Aluno": 
-    			AlunosDAO aluno = new AlunosDAO();
-    			Alunos resultAluno = aluno.getLogin(email, senha);
-    			if(resultAluno.getNome() != null) {
-    				return true;
-    			}
-    			break;
-    		case "Instrutor":
-    			InstrutoresDAO instrutor = new InstrutoresDAO();
-    			Instrutores resultInstrutor = instrutor.getLogin(email, senha);
-    			if(resultInstrutor.getNome() != null) {
-    				return true;
-    			}
-    			break;
-    		case "Admin":
-    			return this.doLoginAdmin(email, senha);
-    	}
-    	return false;
-    }
-    
-    public boolean doLoginAdmin(String email, String senha) {
+    public int doLoginAdmin(String email, String senha) {
     	try {
             String sql = "SELECT * FROM instrutores WHERE email = ? && senha = ?";
             PreparedStatement ps = conexao.prepareStatement(sql);
@@ -54,13 +32,13 @@ public class LoginDAO {
             ResultSet rs = ps.executeQuery();
             
             if ( rs.next() ) {
-            	return true;
+            	return rs.getInt("id");
             }
-            return false;
+            return 0;
             
         } catch( SQLException e ) {
             System.out.println("Erro de SQL: " + e.getMessage());
-            return false;
+            return 0;
         }
     }
 }
