@@ -82,8 +82,21 @@ public class AlunoController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		Alunos aluno = new Alunos();
+		aluno.setNome(request.getParameter("nome"));
+		aluno.setEmail(request.getParameter("email"));
+		aluno.setSenha(request.getParameter("senha"));
+		aluno.setLogin(request.getParameter("login"));
+		aluno.setCpf(request.getParameter("cpf"));
+		aluno.setCelular(request.getParameter("celular"));
+		aluno.setEndereco(request.getParameter("endereco"));
+		aluno.setBairro(request.getParameter("Bairro"));
+		aluno.setCidade(request.getParameter("cidade"));
+		aluno.setCep(request.getParameter("cep"));
+		aluno.setComentario(request.getParameter("comentario"));
+		
+		AlunosDAO alunoDAO = new AlunosDAO();
+		boolean resultado = alunoDAO.gravar(aluno);
 	}
 
 	/**
@@ -97,7 +110,23 @@ public class AlunoController extends HttpServlet {
 	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
 	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		Alunos aluno = new Alunos();
+		aluno.setId(Integer.parseInt(request.getParameter("id")));
+		aluno.setNome(request.getParameter("nome"));
+		aluno.setEmail(request.getParameter("email"));
+		aluno.setSenha(request.getParameter("senha"));
+		aluno.setLogin(request.getParameter("login"));
+		aluno.setCpf(request.getParameter("cpf"));
+		aluno.setCelular(request.getParameter("celular"));
+		aluno.setEndereco(request.getParameter("endereco"));
+		aluno.setBairro(request.getParameter("Bairro"));
+		aluno.setCidade(request.getParameter("cidade"));
+		aluno.setCep(request.getParameter("cep"));
+		aluno.setComentario(request.getParameter("comentario"));
+		aluno.setAprovado(request.getParameter("aprovado").charAt(0));
+		
+		AlunosDAO alunoDAO = new AlunosDAO();
+		boolean resultado = alunoDAO.gravar(aluno);
 	}
 
 }

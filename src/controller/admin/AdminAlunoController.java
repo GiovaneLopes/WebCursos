@@ -19,6 +19,8 @@ import utils.Alunos;
 @WebServlet("/AdminAlunoController")
 public class AdminAlunoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private AlunosDAO alunoDAO = new AlunosDAO();
+	private Alunos aluno;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -32,8 +34,7 @@ public class AdminAlunoController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		AlunosDAO alunoDAO = new AlunosDAO();
-		Alunos aluno;
+		
 		ArrayList resultado = alunoDAO.getLista();
 		PrintWriter out = response.getWriter();
 
@@ -51,7 +52,7 @@ public class AdminAlunoController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Alunos aluno = new Alunos();
+		aluno = new Alunos();
 		aluno.setNome(request.getParameter("nome"));
 		aluno.setEmail(request.getParameter("email"));
 		aluno.setSenha(request.getParameter("senha"));
@@ -64,21 +65,19 @@ public class AdminAlunoController extends HttpServlet {
 		aluno.setCep(request.getParameter("cep"));
 		aluno.setComentario(request.getParameter("comentario"));
 		
-		AlunosDAO alunoDAO = new AlunosDAO();
 		boolean resultado = alunoDAO.gravar(aluno);
 	}
 
 	@Override
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Alunos aluno = new Alunos();
+		aluno = new Alunos();
 		aluno.setId(Integer.parseInt(request.getParameter("id")));
-		AlunosDAO alunoDAO = new AlunosDAO();
 		alunoDAO.excluir(aluno.getId());
 	}
 
 	@Override
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Alunos aluno = new Alunos();
+		aluno = new Alunos();
 		aluno.setId(Integer.parseInt(request.getParameter("id")));
 		aluno.setNome(request.getParameter("nome"));
 		aluno.setEmail(request.getParameter("email"));
@@ -93,7 +92,6 @@ public class AdminAlunoController extends HttpServlet {
 		aluno.setComentario(request.getParameter("comentario"));
 		aluno.setAprovado(request.getParameter("aprovado").charAt(0));
 		
-		AlunosDAO alunoDAO = new AlunosDAO();
 		boolean resultado = alunoDAO.gravar(aluno);
 	}
 

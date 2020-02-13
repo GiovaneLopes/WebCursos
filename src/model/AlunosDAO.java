@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import utils.Alunos;
+import utils.Matriculas;
 
 public class AlunosDAO {
 	private Connection conexao;
@@ -45,7 +46,15 @@ public class AlunosDAO {
     public Alunos getAlunoPorID( int codigo ) {
         Alunos Alunos = new Alunos();
         try {
-            String sql = "SELECT * FROM alunos WHERE id = ?";
+            String sql = "SELECT alunos.*, matriculas.nota, turmas.id, cursos.nome " +
+            			 "FROM alunos " +
+            			 "LEFT JOIN matriculas " +
+            			 "ON alunos.id = matriculas.aluno_id" +
+            			 "LEFT JOIN turmas" +
+            			 "ON matriculas.turmas_id = turmas.id" +
+            			 "LEFT JOIN cursos" +
+            			 "ON turmas.cursos_id = cursos.id" +
+            			 "WHERE alunos.id = ?";
             PreparedStatement ps = conexao.prepareStatement(sql);
             ps.setInt(1, codigo);
             
@@ -84,6 +93,41 @@ public class AlunosDAO {
         return resultado;
     }
     
+    public ArrayList<Alunos> getAlunosInstrutores(int id_turmas){
+    	ArrayList<Alunos> resultado = new ArrayList();
+        try {            
+            Statement stmt = conexao.createStatement();
+
+            String sql = "SELECT * " + 
+            		"FROM alunos " + 
+            		"LEFT JOIN matriculas" +
+            		"ON matriculas.turmas_id = ? ";
+            
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setInt(1, id_turmas);
+            ResultSet rs = ps.executeQuery();
+
+            while( rs.next() ) {
+                Alunos alunos = new Alunos(); 
+                alunos.setId(rs.getInt("id") );
+                alunos.setNome( rs.getString("nome") );
+                
+                Matriculas matricula = new Matriculas();
+                matricula.setAlunos_id(rs.getInt("id"));
+                matricula.setNota(rs.getDouble("nota"));
+                ArrayList<Matriculas> matriculas = new ArrayList();
+                matriculas.add(matricula);
+                alunos.setMatriculas(matriculas);
+                
+                resultado.add(alunos);
+            }
+        } catch( SQLException e ) {
+            System.out.println("Erro de SQL: " + e.getMessage());
+        }
+        
+        return resultado;
+    }
+
     public Alunos getLogin(String email, String senha) {
     	Alunos alunos = new Alunos();
         try {

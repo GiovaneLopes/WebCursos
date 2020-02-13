@@ -1,5 +1,7 @@
 package utils;
 
+import java.util.ArrayList;
+
 public class Alunos {
 
     private int id;
@@ -15,6 +17,7 @@ public class Alunos {
     private String cep;
     private String comentario;
     private char aprovado;
+    private ArrayList<Matriculas> matriculas;
 
 
     public Alunos() {
@@ -138,6 +141,14 @@ public class Alunos {
 
 	public void setAprovado(char aprovado) {
 		this.aprovado = aprovado;
+	}
+
+	public ArrayList<Matriculas> getMatriculas() {
+		return matriculas;
+	}
+
+	public void setMatriculas(ArrayList<Matriculas> matriculas) {
+		this.matriculas = matriculas;
 	}
 
 }

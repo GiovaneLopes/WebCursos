@@ -1,5 +1,7 @@
 package utils;
 
+import java.util.ArrayList;
+
 public class Instrutores {
     private int id;
     private int valor_hora;
@@ -9,7 +11,8 @@ public class Instrutores {
     private String login;
     private String senha;
     private String experiencia;
-
+    private ArrayList<Turmas> turmas;
+    
     public Instrutores() { }
 
     public Instrutores(int id, int valor_hora, String nome, String email, String login, String senha, String experiencia) {
@@ -84,5 +87,13 @@ public class Instrutores {
 
 	public void setExperiencia(String experiencia) {
 		this.experiencia = experiencia;
+	}
+
+	public ArrayList<Turmas> getTurmas() {
+		return turmas;
+	}
+
+	public void setTurmas(ArrayList<Turmas> turmas) {
+		this.turmas = turmas;
 	}
 }

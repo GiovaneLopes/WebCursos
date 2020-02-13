@@ -25,7 +25,14 @@ public class InstrutoresDAO {
         try {            
             Statement stmt = conexao.createStatement();
 
-            ResultSet rs = stmt.executeQuery("select * from instrutores");
+            ResultSet rs = stmt.executeQuery( 
+            	 "SELECT instrutores.*, sum(cursos.carga_horaria) as ch_total " + 
+       			 "FROM instrutores " +
+       			 "LEFT JOIN turmas" +
+       			 "ON turmas.instrutores_id = instrutores.id" +
+       			 "LEFT JOIN cursos" +
+       			 "ON turmas.cursos_id = cursos.id"
+       		);
 
             while( rs.next() ) {
                 Instrutores instrutor = new Instrutores(); 
@@ -45,7 +52,13 @@ public class InstrutoresDAO {
     public Instrutores getInstrutoresPorID( int codigo ) {
         Instrutores Instrutores = new Instrutores();
         try {
-            String sql = "SELECT * FROM instrutores WHERE id = ?";
+            String sql = "SELECT instrutores.*, sum(cursos.carga_horaria) as ch_total, turmas.* " + 
+            			 "FROM instrutores " +
+            			 "LEFT JOIN turmas" +
+            			 "ON turmas.instrutores_id = instrutores.id" +
+            			 "LEFT JOIN cursos" +
+            			 "ON turmas.cursos_id = cursos.id" +
+            			 "WHERE instrutores.id = ?";
             PreparedStatement ps = conexao.prepareStatement(sql);
             ps.setInt(1, codigo);
             
@@ -54,6 +67,7 @@ public class InstrutoresDAO {
             if ( rs.next() ) {
                 Instrutores.setId(rs.getInt("id"));
                 Instrutores.setNome( rs.getString("nome") );
+                Instrutores.setValor_receber(rs.getInt("ch_total") * rs.getInt("valor_hora"));
             }
             
         } catch( SQLException e ) {
