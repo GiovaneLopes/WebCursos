@@ -28,7 +28,7 @@ import org.apache.commons.fileupload.FileUploadException;
 /**
  * Servlet implementation class UploadImage
  */
-@WebServlet("/upload")
+@WebServlet("/aluno/upload")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, // 1MB
 		maxFileSize = 1024 * 1024 * 4, // 4MB
 		maxRequestSize = 1024 * 1024 * 4 // 4MB
