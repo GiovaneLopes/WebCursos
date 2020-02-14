@@ -16,7 +16,7 @@ import utils.Instrutores;
 /**
  * Servlet implementation class AdminInstrutorController
  */
-@WebServlet("/AdminInstrutorController")
+@WebServlet("/admin/instrutor")
 public class AdminInstrutorController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

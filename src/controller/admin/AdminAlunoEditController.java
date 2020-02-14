@@ -17,8 +17,8 @@ import utils.Alunos;
 /**
  * Servlet implementation class AdminAlunoController
  */
-@WebServlet("/admin/alunos")
-public class AdminAlunoController extends HttpServlet {
+@WebServlet("/admin/alunos/edit")
+public class AdminAlunoEditController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private AlunosDAO alunoDAO = new AlunosDAO();
 	private Alunos aluno;
@@ -26,7 +26,7 @@ public class AdminAlunoController extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminAlunoController() {
+    public AdminAlunoEditController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,7 +35,10 @@ public class AdminAlunoController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher resposta = request.getRequestDispatcher("listAlunos.jsp");
+		int id = Integer.parseInt(request.getParameter("id"));
+		aluno = alunoDAO.getAlunoPorID(id);
+		request.setAttribute("obetoToUpdate", aluno);
+		RequestDispatcher resposta = request.getRequestDispatcher("tables.jsp");
 		resposta.forward(request, response);
 	}
 
@@ -43,31 +46,6 @@ public class AdminAlunoController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		aluno = new Alunos();
-		aluno.setNome(request.getParameter("nome"));
-		aluno.setEmail(request.getParameter("email"));
-		aluno.setSenha(request.getParameter("senha"));
-		aluno.setLogin(request.getParameter("login"));
-		aluno.setCpf(request.getParameter("cpf"));
-		aluno.setCelular(request.getParameter("celular"));
-		aluno.setEndereco(request.getParameter("endereco"));
-		aluno.setBairro(request.getParameter("Bairro"));
-		aluno.setCidade(request.getParameter("cidade"));
-		aluno.setCep(request.getParameter("cep"));
-		aluno.setComentario(request.getParameter("comentario"));
-		
-		boolean resultado = alunoDAO.gravar(aluno);
-	}
-
-	@Override
-	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		aluno = new Alunos();
-		aluno.setId(Integer.parseInt(request.getParameter("id")));
-		alunoDAO.excluir(aluno.getId());
-	}
-
-	@Override
-	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		aluno = new Alunos();
 		aluno.setId(Integer.parseInt(request.getParameter("id")));
 		aluno.setNome(request.getParameter("nome"));

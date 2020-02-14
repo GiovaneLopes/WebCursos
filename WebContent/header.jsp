@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%
-	int tipoUser = (int) session.getAttribute("tipoUser");
+	int tipoUser = (int) session.getAttribute("tipoUser") > 0 ? 0 : (int) session.getAttribute("tipoUser");
 %>
 <!-- DOCTYPE html> -->
 <html>
@@ -20,7 +20,7 @@
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="assets/css/bootstrap.css">
 
-<title>WebCursos - Sign on</title>
+<title>WebCursos</title>
 <script>
 	// Example starter JavaScript for disabling form submissions if there are invalid fields
 	(function() {

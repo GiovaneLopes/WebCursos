@@ -1,4 +1,4 @@
-package utils;
+package filters;
 
 import java.io.IOException;
 import javax.servlet.Filter;
@@ -13,15 +13,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet Filter implementation class FilterAccessInstrutor
+ * Servlet Filter implementation class FilterAccessAluno
  */
-@WebFilter("/FilterAccessInstrutor")
-public class FilterAccessInstrutor implements Filter {
+@WebFilter("/FilterAccessAluno")
+public class FilterAccessAluno implements Filter {
 
     /**
      * Default constructor. 
      */
-    public FilterAccessInstrutor() {
+    public FilterAccessAluno() {
         // TODO Auto-generated constructor stub
     }
 
@@ -47,7 +47,7 @@ public class FilterAccessInstrutor implements Filter {
 		String email = (String) session.getAttribute("email");
 		int tipoUser = (int) session.getAttribute("tipoUser");
 		System.out.println(email);
-		if (email == null && tipoUser == 2) {
+		if (email == null && tipoUser == 1) {
 			httpResp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
 		} else {
 			chain.doFilter(request, response);

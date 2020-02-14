@@ -1,6 +1,7 @@
-package utils;
+package filters;
 
 import java.io.IOException;
+import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -13,17 +14,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet Filter implementation class FilterAccessAluno
+ * Servlet Filter implementation class FilterAccess
  */
-@WebFilter("/FilterAccessAluno")
-public class FilterAccessAluno implements Filter {
+@WebFilter(dispatcherTypes = { DispatcherType.REQUEST }, urlPatterns = { "/FilterAccessAdmin", "/admin/*",
+		"/instrutor/*", "/tables.jsp", "/upload.jsp", }, servletNames = { "UploadImage" })
+public class FilterAccessAdmin implements Filter {
 
-    /**
-     * Default constructor. 
-     */
-    public FilterAccessAluno() {
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * Default constructor.
+	 */
+	public FilterAccessAdmin() {
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see Filter#destroy()
@@ -35,7 +37,8 @@ public class FilterAccessAluno implements Filter {
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
 		HttpServletRequest httpReq = (HttpServletRequest) request;
 		HttpServletResponse httpResp = (HttpServletResponse) response;
 		HttpSession session = httpReq.getSession();
@@ -47,11 +50,13 @@ public class FilterAccessAluno implements Filter {
 		String email = (String) session.getAttribute("email");
 		int tipoUser = (int) session.getAttribute("tipoUser");
 		System.out.println(email);
-		if (email == null && tipoUser == 1) {
-			httpResp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-		} else {
-			chain.doFilter(request, response);
-		}
+		/*
+		 * if (email == null && tipoUser == 3) {
+		 *
+		 * httpResp.sendError(HttpServletResponse.SC_UNAUTHORIZED); } else {
+		 * chain.doFilter(request, response); }
+		 */
+		chain.doFilter(request, response);
 	}
 
 	/**

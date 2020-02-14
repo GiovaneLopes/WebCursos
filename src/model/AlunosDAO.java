@@ -21,8 +21,8 @@ public class AlunosDAO {
             System.out.println(e);
         }
     }
-    public ArrayList getLista() {
-        ArrayList resultado = new ArrayList();
+    public ArrayList<Alunos> getLista() {
+        ArrayList<Alunos> resultado = new ArrayList<Alunos>();
         try {            
             Statement stmt = conexao.createStatement();
 
@@ -33,6 +33,16 @@ public class AlunosDAO {
                 
                 alunos.setId(rs.getInt("id") );
                 alunos.setNome( rs.getString("nome") );
+                alunos.setAprovado(rs.getString("aprovado").charAt(0));
+                alunos.setBairro(rs.getString("bairro"));
+                alunos.setCelular(rs.getString("celular"));
+                alunos.setCep(rs.getString("cep"));
+                alunos.setCidade(rs.getString("cidade"));
+                alunos.setComentario(rs.getString("comentario"));
+                alunos.setCpf(rs.getString("cpf"));
+                alunos.setEmail(rs.getString("email"));
+                alunos.setEndereco(rs.getString("endereco"));
+                alunos.setLogin(rs.getString("login"));
 
                 resultado.add(alunos);
             }
@@ -44,16 +54,16 @@ public class AlunosDAO {
     }
     
     public Alunos getAlunoPorID( int codigo ) {
-        Alunos Alunos = new Alunos();
+        Alunos alunos = new Alunos();
         try {
             String sql = "SELECT alunos.*, matriculas.nota, turmas.id, cursos.nome " +
             			 "FROM alunos " +
             			 "LEFT JOIN matriculas " +
-            			 "ON alunos.id = matriculas.aluno_id" +
-            			 "LEFT JOIN turmas" +
-            			 "ON matriculas.turmas_id = turmas.id" +
-            			 "LEFT JOIN cursos" +
-            			 "ON turmas.cursos_id = cursos.id" +
+            			 "ON alunos.id = matriculas.aluno_id " +
+            			 "LEFT JOIN turmas " +
+            			 "ON matriculas.turmas_id = turmas.id " +
+            			 "LEFT JOIN cursos " +
+            			 "ON turmas.cursos_id = cursos.id " +
             			 "WHERE alunos.id = ?";
             PreparedStatement ps = conexao.prepareStatement(sql);
             ps.setInt(1, codigo);
@@ -61,14 +71,24 @@ public class AlunosDAO {
             ResultSet rs = ps.executeQuery();
             
             if ( rs.next() ) {
-                Alunos.setId(rs.getInt("id"));
-                Alunos.setNome( rs.getString("nome") );
+                alunos.setId(rs.getInt("id"));
+                alunos.setNome( rs.getString("nome") );
+                alunos.setAprovado(rs.getString("aprovado").charAt(0));
+                alunos.setBairro(rs.getString("bairro"));
+                alunos.setCelular(rs.getString("celular"));
+                alunos.setCep(rs.getString("cep"));
+                alunos.setCidade(rs.getString("cidade"));
+                alunos.setComentario(rs.getString("comentario"));
+                alunos.setCpf(rs.getString("cpf"));
+                alunos.setEmail(rs.getString("email"));
+                alunos.setEndereco(rs.getString("endereco"));
+                alunos.setLogin(rs.getString("login"));
             }
             
         } catch( SQLException e ) {
             System.out.println("Erro de SQL: " + e.getMessage());
         }
-        return Alunos;
+        return alunos;
     }
     
     public ArrayList<Alunos> getAlunosPendentes(){
@@ -81,8 +101,18 @@ public class AlunosDAO {
             while( rs.next() ) {
                 Alunos alunos = new Alunos(); 
                 
-                alunos.setId(rs.getInt("id") );
+                alunos.setId(rs.getInt("id"));
                 alunos.setNome( rs.getString("nome") );
+                alunos.setAprovado(rs.getString("aprovado").charAt(0));
+                alunos.setBairro(rs.getString("bairro"));
+                alunos.setCelular(rs.getString("celular"));
+                alunos.setCep(rs.getString("cep"));
+                alunos.setCidade(rs.getString("cidade"));
+                alunos.setComentario(rs.getString("comentario"));
+                alunos.setCpf(rs.getString("cpf"));
+                alunos.setEmail(rs.getString("email"));
+                alunos.setEndereco(rs.getString("endereco"));
+                alunos.setLogin(rs.getString("login"));
 
                 resultado.add(alunos);
             }
@@ -100,7 +130,7 @@ public class AlunosDAO {
 
             String sql = "SELECT * " + 
             		"FROM alunos " + 
-            		"LEFT JOIN matriculas" +
+            		"LEFT JOIN matriculas " +
             		"ON matriculas.turmas_id = ? ";
             
             PreparedStatement ps = conexao.prepareStatement(sql);
@@ -109,13 +139,23 @@ public class AlunosDAO {
 
             while( rs.next() ) {
                 Alunos alunos = new Alunos(); 
-                alunos.setId(rs.getInt("id") );
+                alunos.setId(rs.getInt("id"));
                 alunos.setNome( rs.getString("nome") );
+                alunos.setAprovado(rs.getString("aprovado").charAt(0));
+                alunos.setBairro(rs.getString("bairro"));
+                alunos.setCelular(rs.getString("celular"));
+                alunos.setCep(rs.getString("cep"));
+                alunos.setCidade(rs.getString("cidade"));
+                alunos.setComentario(rs.getString("comentario"));
+                alunos.setCpf(rs.getString("cpf"));
+                alunos.setEmail(rs.getString("email"));
+                alunos.setEndereco(rs.getString("endereco"));
+                alunos.setLogin(rs.getString("login"));
                 
                 Matriculas matricula = new Matriculas();
                 matricula.setAlunos_id(rs.getInt("id"));
                 matricula.setNota(rs.getDouble("nota"));
-                ArrayList<Matriculas> matriculas = new ArrayList();
+                ArrayList<Matriculas> matriculas = new ArrayList<Matriculas>();
                 matriculas.add(matricula);
                 alunos.setMatriculas(matriculas);
                 

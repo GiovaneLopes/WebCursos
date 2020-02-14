@@ -3,16 +3,6 @@
 <!DOCTYPE html>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark footer-nav">
 	<a class="navbar-brand" href="#">WebCursos</a>
-	<div class="footer" id="navbarNav">
-		<ul class="navbar-nav nav-footer">
-			<li class="nav-item active"><a class="nav-link" href="#">
-					Cursos online</a></li>
-		</ul>
-		<ul class="navbar-nav nav-footer">
-			<li class="nav-item"><a class="nav-link" href="#"> Ajuda</a></li>
-			<li class="nav-item"><a class="nav-link" href="#"> Contato</a></li>
-		</ul>
-	</div>
 </nav>
 
 <!-- Optional JavaScript -->

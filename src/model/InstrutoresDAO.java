@@ -20,17 +20,17 @@ public class InstrutoresDAO {
             System.out.println(e);
         }
     }
-    public ArrayList getLista() {
-        ArrayList resultado = new ArrayList();
+    public ArrayList<Instrutores> getLista() {
+        ArrayList<Instrutores> resultado = new ArrayList<Instrutores>();
         try {            
             Statement stmt = conexao.createStatement();
 
             ResultSet rs = stmt.executeQuery( 
             	 "SELECT instrutores.*, sum(cursos.carga_horaria) as ch_total " + 
        			 "FROM instrutores " +
-       			 "LEFT JOIN turmas" +
-       			 "ON turmas.instrutores_id = instrutores.id" +
-       			 "LEFT JOIN cursos" +
+       			 "LEFT JOIN turmas " +
+       			 "ON turmas.instrutores_id = instrutores.id " +
+       			 "LEFT JOIN cursos " +
        			 "ON turmas.cursos_id = cursos.id"
        		);
 
@@ -54,10 +54,10 @@ public class InstrutoresDAO {
         try {
             String sql = "SELECT instrutores.*, sum(cursos.carga_horaria) as ch_total, turmas.* " + 
             			 "FROM instrutores " +
-            			 "LEFT JOIN turmas" +
-            			 "ON turmas.instrutores_id = instrutores.id" +
-            			 "LEFT JOIN cursos" +
-            			 "ON turmas.cursos_id = cursos.id" +
+            			 "LEFT JOIN turmas " +
+            			 "ON turmas.instrutores_id = instrutores.id " +
+            			 "LEFT JOIN cursos " +
+            			 "ON turmas.cursos_id = cursos.id " +
             			 "WHERE instrutores.id = ?";
             PreparedStatement ps = conexao.prepareStatement(sql);
             ps.setInt(1, codigo);

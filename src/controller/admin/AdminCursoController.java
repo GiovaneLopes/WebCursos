@@ -16,7 +16,7 @@ import utils.Cursos;
 /**
  * Servlet implementation class AdminCursoController
  */
-@WebServlet("/AdminCursoController")
+@WebServlet("/admin/curso")
 public class AdminCursoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

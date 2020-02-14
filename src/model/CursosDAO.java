@@ -20,8 +20,8 @@ public class CursosDAO {
             System.out.println(e);
         }
     }
-    public ArrayList getLista() {
-        ArrayList resultado = new ArrayList();
+    public ArrayList<Cursos> getLista() {
+        ArrayList<Cursos> resultado = new ArrayList<Cursos>();
         try {            
             Statement stmt = conexao.createStatement();
 

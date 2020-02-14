@@ -10,14 +10,14 @@
 
 <div class="container">
 	<div class="principal-title">
-		<h1 class="welcome">Our Student's comments!</h1>
+		<h1 class="welcome">Our Students!</h1>
 		<p>Lorem Ipsum is simply dummy text of the printing and
 			typesetting industry.Lorem Ipsum is simply dummy text of the printing
 			and typesetting industry.</p>
 	</div>
 	<div class="courses-cards">
 		<%
-			for (int i = 0; i < alunos.size(); i++) { if(alunos.get(i).getComentario() != null){
+			for (int i = 0; i < alunos.size(); i++) {
 		%>
 		<div class="card card-courses" style="width: 18rem;">
 			<%
@@ -36,15 +36,38 @@
 			%>
 			<div class="card-body text-comments">
 				<h5 class="card-title">
+					Nome:
 					<%=alunos.get(i).getNome()%></h5>
 				<div class="card-text">
-					<%=alunos.get(i).getComentario()%>
+					<ul>
+						<li>Cpf: <%=alunos.get(i).getCpf()%>
+						</li>
+						<li>Celular: <%=alunos.get(i).getCelular()%>
+						</li>
+						<li>Email: <%=alunos.get(i).getEmail()%>
+						</li>
+						<li>Login: <%=alunos.get(i).getLogin()%>
+						</li>
+						<li>Endereco: <%=alunos.get(i).getEndereco()%>
+						</li>
+						<li>Cidade: <%=alunos.get(i).getCidade()%>
+						</li>
+						<li>Bairro: <%=alunos.get(i).getBairro()%>
+						</li>
+						<li>Cep: <%=alunos.get(i).getCep()%>
+						</li>
+						<li>Comentario: <%=alunos.get(i).getComentario()%>
+						</li>
+						<li>Aprovado: <%=alunos.get(i).getAprovado()%>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</div>
 		<%
-			}}
+			}
 		%>
+
 	</div>
 </div>
 <jsp:include page="footer.jsp"></jsp:include>

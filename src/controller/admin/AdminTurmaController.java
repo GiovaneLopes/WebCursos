@@ -19,7 +19,7 @@ import utils.Turmas;
 /**
  * Servlet implementation class AdminTurmaController
  */
-@WebServlet("/AdminTurmaController")
+@WebServlet("/admin/turma")
 public class AdminTurmaController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
