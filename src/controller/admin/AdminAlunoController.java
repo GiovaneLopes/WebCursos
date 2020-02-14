@@ -57,6 +57,9 @@ public class AdminAlunoController extends HttpServlet {
 		aluno.setComentario(request.getParameter("comentario"));
 		
 		boolean resultado = alunoDAO.gravar(aluno);
+		request.setAttribute("resultadoReq", resultado);
+		RequestDispatcher resposta = request.getRequestDispatcher("../tables.jsp");
+		resposta.forward(request, response);
 	}
 
 	@Override

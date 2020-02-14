@@ -34,24 +34,30 @@ public class AdminInstrutorEditController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int id = Integer.parseInt(request.getParameter("id"));
-		instrutor = instrutorDAO.getInstrutoresPorID(id);
-		request.setAttribute("objetoToUpdate", instrutor);
-		RequestDispatcher resposta = request.getRequestDispatcher("tables.jsp");
-		resposta.forward(request, response);
+		if(request.getParameter("id") == null || Integer.parseInt(request.getParameter("id")) == 0) {
+			RequestDispatcher resposta = request.getRequestDispatcher("../../tables.jsp");
+			resposta.forward(request, response);
+		}else {
+			int id = Integer.parseInt(request.getParameter("id"));
+			instrutor = instrutorDAO.getInstrutoresPorID(id);
+			request.setAttribute("objetoToUpdate", instrutor);
+			RequestDispatcher resposta = request.getRequestDispatcher("../../tables.jsp");
+			resposta.forward(request, response);
+		}
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println();
 		instrutor = new Instrutores();
 		instrutor.setId(Integer.parseInt(request.getParameter("id")));
 		instrutor.setNome(request.getParameter("nome"));
 		instrutor.setEmail(request.getParameter("email"));
 		instrutor.setSenha(request.getParameter("senha"));
 		instrutor.setLogin(request.getParameter("login"));
-		instrutor.setSenha(request.getParameter("senha"));
+		instrutor.setSenha((String)request.getAttribute("senha"));
 		instrutor.setExperiencia(request.getParameter("experiencia"));
 		instrutor.setValor_hora(Integer.parseInt(request.getParameter("valor_hora")));
 		

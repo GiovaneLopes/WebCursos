@@ -51,6 +51,13 @@
 						<li>Valor a receber: <%=instrutores.get(i).getValor_receber()%>
 						</li>
 					</ul>
+					<% //if(session.getAttribute("tipoUser") != null && (int) session.getAttribute("tipoUser") == 3) { %>
+					<form id="deletar_professor">
+						<input type="hidden" value="<%= instrutores.get(i).getId() %>" name="id">
+						<button type="submit" class="btn btn-danger">Deletar professor</button>
+					</form>
+					<a href="/App/admin/instrutor/edit?id=<%= instrutores.get(i).getId() %>"><button type="button" class="btn btn-primary">Editar</button></a>
+					<%// } %>
 				</div>
 			</div>
 		</div>
@@ -60,5 +67,22 @@
 
 	</div>
 </div>
-
 <jsp:include page="footer.jsp"></jsp:include>
+<script>
+	$('form#deletar_professor').submit(function(ev){
+		ev.preventDefault()
+		let id_professor = $(this).children('input[name=id]').val().trim()
+		$.ajax({
+		    url: '/App/admin/instrutor?id=' + id_professor,
+		    type: 'DELETE',
+		    complete: function(result) {
+		    	console.log(result)
+		    	if(result.status == 200) {
+		    		alert("Professor deletado!")
+		    	} else {
+		    		alert("Erro ao deletar professor")
+		    	}
+		    },
+		});
+	})
+</script>

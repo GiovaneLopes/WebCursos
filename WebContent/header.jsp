@@ -62,13 +62,17 @@
 						class="fas fa-home"></i> Home </a></li>
 				<li class="nav-item"><a class="nav-link" href="/App/about.jsp"><i
 						class="far fa-building"></i> About</a></li>
-				<li class="nav-item"><a class="nav-link" href="/App/comments.jsp"><i
-						class="far fa-comment"></i> Comments </a></li>
-				<li class="nav-item"><a class="nav-link" href="/App/teachers.jsp"><i
-						class="fas fa-graduation-cap"></i> Teachers</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="/App/comments.jsp"><i class="far fa-comment"></i>
+						Comments </a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="/App/teachers.jsp"><i class="fas fa-graduation-cap"></i>
+						Teachers</a></li>
 				<%
 					if (tipoUser == 1) {
 				%>
+				<li class="nav-item"><a class="nav-link" href="/App/upload.jsp"><i
+						class="fas fa-image"></i>Upload de foto</a></li>
 				<%
 					} else if (tipoUser == 2) {
 				%>
@@ -77,15 +81,20 @@
 				%>
 				<li class="nav-item"><a class="nav-link" href="/App/tables.jsp"><i
 						class="fas fa-table"></i> Tables </a></li>
-				<li class="nav-item"><a class="nav-link" href="/App/admin/alunos"><i
-						class="fas fa-graduation-cap"></i> Alunos </a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="/App/admin/alunos"><i class="fas fa-graduation-cap"></i>
+						Alunos </a></li>
+				<li class="nav-item"><a class="nav-link" href="/App/admin/upload.jsp"><i
+						class="fas fa-image"></i>Upload de foto</a></li>
 				<%
 					} else {
 				%>
-				<li class="nav-item"><a class="nav-link" href="/App/admin/alunos"><i
-						class="fas fa-graduation-cap"></i> Alunos </a></li>
-				<li class="nav-item"><a class="nav-link " href="/App/register.jsp"><i
-						class="far fa-user-circle"></i> Register </a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="/App/admin/alunos"><i class="fas fa-graduation-cap"></i>
+						Alunos </a></li>
+				<li class="nav-item"><a class="nav-link "
+					href="/App/register.jsp"><i class="far fa-user-circle"></i>
+						Register </a></li>
 				<li class="nav-item"><a class="nav-link" href="/App/signin.jsp"><i
 						class="far fa-user"></i> Sign in</a></li>
 				<%

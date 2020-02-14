@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,18 +33,8 @@ public class AdminCursoController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		CursosDAO cursosDAO = new CursosDAO();
-		Cursos curso;
-		ArrayList resultado = cursosDAO.getLista();
-		PrintWriter out = response.getWriter();
-
-        out.println("<html>");
-        out.println("<body>");
-        for(int i=0; i < resultado.size(); i++) {
-        	curso = (Cursos) resultado.get(i);
-        	out.print(curso.getNome());
-        	out.print(curso.getId());
-        }
+		RequestDispatcher resposta = request.getRequestDispatcher("../tables.jsp");
+		resposta.forward(request, response);
 	}
 
 	/**
@@ -59,6 +50,9 @@ public class AdminCursoController extends HttpServlet {
 				
 		CursosDAO cursoDAO = new CursosDAO();
 		boolean resultado = cursoDAO.gravar(curso);
+		request.setAttribute("resultadoReq", resultado);
+		RequestDispatcher resposta = request.getRequestDispatcher("../tables.jsp");
+		resposta.forward(request, response);
 	}
 
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -37,7 +37,7 @@ public class AdminCursoEditController extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("id"));
 		curso = cursoDAO.getCursoPorID(id);
 		request.setAttribute("objetoToUpdate", curso);
-		RequestDispatcher resposta = request.getRequestDispatcher("tables.jsp");
+		RequestDispatcher resposta = request.getRequestDispatcher("../../tables.jsp");
 		resposta.forward(request, response);
 	}
 

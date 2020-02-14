@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,18 +33,8 @@ public class AdminInstrutorController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		InstrutoresDAO instrutorDAO = new InstrutoresDAO();
-		Instrutores instrutor;
-		ArrayList resultado = instrutorDAO.getLista();
-		PrintWriter out = response.getWriter();
-
-        out.println("<html>");
-        out.println("<body>");
-        for(int i=0; i < resultado.size(); i++) {
-        	instrutor = (Instrutores) resultado.get(i);
-        	out.print(instrutor.getNome());
-        	out.print(instrutor.getId());
-        }
+		RequestDispatcher resposta = request.getRequestDispatcher("../../tables.jsp");
+		resposta.forward(request, response);
 	}
 
 	/**
@@ -55,33 +46,29 @@ public class AdminInstrutorController extends HttpServlet {
 		instrutor.setEmail(request.getParameter("email"));
 		instrutor.setSenha(request.getParameter("senha"));
 		instrutor.setLogin(request.getParameter("login"));
-		instrutor.setSenha(request.getParameter("senha"));
+		instrutor.setSenha((String)request.getAttribute("senha"));
 		instrutor.setExperiencia(request.getParameter("experiencia"));
 		instrutor.setValor_hora(Integer.parseInt(request.getParameter("valor_hora")));
 		
 		InstrutoresDAO instrutorDAO = new InstrutoresDAO();
 		boolean resultado = instrutorDAO.gravar(instrutor);
+		request.setAttribute("resultadoReq", resultado);
+		RequestDispatcher resposta = request.getRequestDispatcher("../tables.jsp");
+		resposta.forward(request, response);
 	}
 
+	/**
+	 * @see HttpServlet#doDelete(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println(request.getParameter("id") );
+		if(request.getParameter("id") == null || Integer.parseInt(request.getParameter("id"))== 0) {
+			response.sendError(400, "Id invalido");
+		}
 		Instrutores instrutor = new Instrutores();
 		instrutor.setId(Integer.parseInt(request.getParameter("id")));
 		InstrutoresDAO instrutorDAO = new InstrutoresDAO();
 		instrutorDAO.excluir(instrutor.getId());
-	}
-
-	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Instrutores instrutor = new Instrutores();
-		instrutor.setId(Integer.parseInt(request.getParameter("id")));
-		instrutor.setNome(request.getParameter("nome"));
-		instrutor.setEmail(request.getParameter("email"));
-		instrutor.setSenha(request.getParameter("senha"));
-		instrutor.setLogin(request.getParameter("login"));
-		instrutor.setSenha(request.getParameter("senha"));
-		instrutor.setExperiencia(request.getParameter("experiencia"));
-		instrutor.setValor_hora(Integer.parseInt(request.getParameter("valor_hora")));
-		
-		InstrutoresDAO instrutorDAO = new InstrutoresDAO();
-		boolean resultado = instrutorDAO.gravar(instrutor);
+		response.getWriter().write("{isSuccess: true}");
 	}
 }

@@ -1,142 +1,50 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <jsp:include page="header.jsp"></jsp:include>
+<%@ page
+	import="model.CursosDAO, utils.Cursos, java.util.ArrayList, java.io.File, java.util.Date"%>
+<%
+	CursosDAO cursosDAO = new CursosDAO();
+	ArrayList<Cursos> cursos = cursosDAO.getLista();
+%>
+
 <div class="container">
-	<div id="carouselExampleSlidesOnly" class="carousel slide"
-		data-ride="carousel">
-		<div class="carousel-inner">
-			<div class="carousel-item active">
-				<img src="assets/images/carousel1.jpg" class="d-block w-100"
-					alt="...">
-			</div>
-			<div class="carousel-item">
-				<img src="assets/images/carousel2.jpg" class="d-block w-100"
-					alt="...">
-			</div>
-			<div class="carousel-item">
-				<img src="assets/images/carousel3.png" class="d-block w-100"
-					alt="...">
-			</div>
-		</div>
-	</div>
 	<div class="principal-title">
 		<h1 class="welcome">Welcome!</h1>
 		<h2 class="our-courses">Our Courses</h2>
 	</div>
 	<div class="courses-cards">
+		<%
+			for (int i = 0; i < cursos.size(); i++) {
+		%>
 		<div class="card card-courses" style="width: 18rem;">
-			<img src="assets/images/curso-image.jpg" class="card-img-top"
-				alt="...">
+			<%
+				File image = new File(
+							System.getProperty("user.home") + "/fotos/instrutores/" + cursos.get(i).getId());
+					if (image.exists() && image.isFile()) {
+			%>
+			<img
+				src="<%=System.getProperty("user.home") + "/fotos/instrutores/" + cursos.get(i).getId()%>"
+				class="card-img-top" alt="...">
+			<%
+				} else {
+			%>
+			<img
+				src='<%=request.getContextPath() + "/assets/images/curso-image.jpg"%>'
+				class="card-img-top" alt="...">
+			<%
+				}
+			%>
 			<div class="card-body card-body-courses">
-				<h5 class="card-title course-title">Course Title</h5>
-				<div class="badges">
-					<span class="badge badge-primary">Category</span> <span
-						class="badge badge-secondary">Price</span> <span
-						class="badge badge-success">Area</span> <span
-						class="badge badge-danger">Difficult</span>
-				</div>
-				<p class="course-title p-title">U$ 19.99</p>
-
+				<h5 class="card-title course-title"><%= cursos.get(i).getNome() %></h5>
+				<p class="course-title p-title"><%= cursos.get(i).getPreco() %></p>
 				<a href="#" class="btn btn-success"><i
 					class="fas fa-dollar-sign"></i> Buy</a>
 			</div>
 		</div>
-		<div class="card card-courses" style="width: 18rem;">
-			<img src="assets/images/curso-image.jpg" class="card-img-top"
-				alt="...">
-			<div class="card-body card-body-courses">
-				<h5 class="card-title course-title">Course Title</h5>
-				<div class="badges">
-					<span class="badge badge-primary">Category</span> <span
-						class="badge badge-secondary">Price</span> <span
-						class="badge badge-success">Area</span> <span
-						class="badge badge-danger">Difficult</span>
-				</div>
-				<p class="course-title p-title">U$ 19.99</p>
-
-				<a href="#" class="btn btn-success"><i
-					class="fas fa-dollar-sign"></i> Buy</a>
-			</div>
-		</div>
-		<div class="card card-courses" style="width: 18rem;">
-			<img src="assets/images/curso-image.jpg" class="card-img-top"
-				alt="...">
-			<div class="card-body card-body-courses">
-				<h5 class="card-title course-title">Course Title</h5>
-				<div class="badges">
-					<span class="badge badge-primary">Category</span> <span
-						class="badge badge-secondary">Price</span> <span
-						class="badge badge-success">Area</span> <span
-						class="badge badge-danger">Difficult</span>
-				</div>
-				<p class="course-title p-title">U$ 19.99</p>
-
-				<a href="#" class="btn btn-success"><i
-					class="fas fa-dollar-sign"></i> Buy</a>
-			</div>
-		</div>
-		<div class="card card-courses" style="width: 18rem;">
-			<img src="assets/images/curso-image.jpg" class="card-img-top"
-				alt="...">
-			<div class="card-body card-body-courses">
-				<h5 class="card-title course-title">Course Title</h5>
-				<div class="badges">
-					<span class="badge badge-primary">Category</span> <span
-						class="badge badge-secondary">Price</span> <span
-						class="badge badge-success">Area</span> <span
-						class="badge badge-danger">Difficult</span>
-				</div>
-				<p class="course-title p-title">U$ 19.99</p>
-
-				<a href="#" class="btn btn-success"><i
-					class="fas fa-dollar-sign"></i> Buy</a>
-			</div>
-		</div>
-		<div class="card card-courses" style="width: 18rem;">
-			<img src="assets/images/curso-image.jpg" class="card-img-top"
-				alt="...">
-			<div class="card-body card-body-courses">
-				<h5 class="card-title course-title">Course Title</h5>
-				<div class="badges">
-					<span class="badge badge-primary">Category</span> <span
-						class="badge badge-secondary">Price</span> <span
-						class="badge badge-success">Area</span> <span
-						class="badge badge-danger">Difficult</span>
-				</div>
-				<p class="course-title p-title">U$ 19.99</p>
-
-				<a href="#" class="btn btn-success"><i
-					class="fas fa-dollar-sign"></i> Buy</a>
-			</div>
-		</div>
-		<div class="card card-courses" style="width: 18rem;">
-			<img src="assets/images/curso-image.jpg" class="card-img-top"
-				alt="...">
-			<div class="card-body card-body-courses">
-				<h5 class="card-title course-title">Course Title</h5>
-				<div class="badges">
-					<span class="badge badge-primary">Category</span> <span
-						class="badge badge-secondary">Price</span> <span
-						class="badge badge-success">Area</span> <span
-						class="badge badge-danger">Difficult</span>
-				</div>
-				<p class="course-title p-title">U$ 19.99</p>
-
-				<a href="#" class="btn btn-success"><i
-					class="fas fa-dollar-sign"></i> Buy</a>
-			</div>
-		</div>
-
-
-		<nav aria-label="Page navigation example" class="pagination-courses">
-			<ul class="pagination">
-				<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#">Next</a></li>
-			</ul>
-		</nav>
+		<%
+			}
+		%>
 	</div>
 </div>
 <jsp:include page="footer.jsp"></jsp:include>

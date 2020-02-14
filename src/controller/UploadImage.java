@@ -62,9 +62,10 @@ public class UploadImage extends HttpServlet {
 
 		Part filePart = request.getPart("file"); // Retrieves <input type="file" name="file">
 	    InputStream fileContent = filePart.getInputStream();
-	    String dir = System.getProperty("user.home") +  "/fotos/alunos/"; // Mudar para pegar o tipo de usuario na sessao
+	    String dir = System.getProperty("user.home") +  "/fotos/alunos/";
 	    String idAluno = request.getParameter("idAluno"); // Mudar para pegar o id na sessao do usuario
 	    idAluno = "1";
+	    String filename = idAluno + ".png";
 	    
 	    try{
 	    	Files.createDirectories(Paths.get(dir));
@@ -73,7 +74,7 @@ public class UploadImage extends HttpServlet {
 	    	System.out.println("security: " + se);
 	    }        
 	    
-	    File file = new File(dir, idAluno + ".png");
+	    File file = new File(dir, filename);
 	    try (InputStream input = fileContent) {
 	        Files.copy(input, file.toPath());
 	    } catch(Exception e) {

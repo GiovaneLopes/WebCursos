@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet Filter implementation class FilterLogin
  */
-@WebFilter(urlPatterns = { "/FilterPass", "/login" }, servletNames = { "LoginController", "AlunoController" })
+@WebFilter(urlPatterns = { "/FilterPass", "/login", "/admin/*" }, servletNames = { "LoginController", "AlunoController" })
 public class FilterPass implements Filter {
 
 	/**
@@ -47,19 +47,21 @@ public class FilterPass implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		HttpServletRequest httpReq = (HttpServletRequest) request;
-		HttpServletResponse httpResp = (HttpServletResponse) response;
 		String senha = httpReq.getParameter("senha");
 		System.out.println("Cheguei no filter");
 		System.out.println("Senha: " + senha);
-		if (senha != null && senha.trim() != "") {
+		if (senha != null) {
+			if(senha.trim() != "") {
+				httpReq.setAttribute("resultadoReq", false);
+				RequestDispatcher rd = httpReq.getRequestDispatcher("/signin.jsp");
+				rd.include(request, response);
+			}
 	        String securePassword = getSecurePassword(senha, "DEVWEB".getBytes() );
 	        httpReq.setAttribute("senha", securePassword);
 			chain.doFilter(request, response);
 	        System.out.println(securePassword);
 		}else {
-			httpReq.setAttribute("resultadoReq", false);
-			RequestDispatcher rd = httpReq.getRequestDispatcher("/signin.jsp");
-			rd.include(request, response);
+			chain.doFilter(request, response);
 		}
 	}
 

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="UTF-8"%>
 <%@ page import="model.*, utils.*, java.util.ArrayList"%>
 <%
 	Object objetoToUpdate = request.getAttribute("objetoToUpdate");
@@ -36,16 +36,16 @@
 	<%
 		if (request.getAttribute("resultadoReq") != null) {
 			if ((boolean) request.getAttribute("resultadoReq") == true) {
-				out.print("<div class='alert alert-success' role='alert'>Usu�rio cadastrado com sucesso!</div>");
+				out.print("<div class='alert alert-success' role='alert'>Ação realizada com sucesso!</div>");
 			} else {
-				out.print("<div class='alert alert-danger' role='alert'>Erro ao cadastrar usu�rio!</div>");
+				out.print("<div class='alert alert-danger' role='alert'>Erro ao realizar ação!</div>");
 			}
 		}
 	%>
 	<%
 		if (aluno != null) {
 	%>
-	<form method="post" action="admin/aluno/edit" class="needs-validation"
+	<form method="post" action="/App/admin/aluno/edit" class="needs-validation"
 		novalidate id="studant-form">
 		<div class="form-group">
 			<label for="exampleInputEmail1">Cpf*</label> <input pattern=".{11}"
@@ -128,7 +128,7 @@
 	<%
 		} else if (instrutor != null) {
 	%>
-	<form method="post" action="admin/instrutor/edit"
+	<form method="post" action="/App/admin/instrutor/edit"
 		class="needs-validation" novalidate id="teacher-form">
 		<div class="form-group">
 			<label for="exampleInputEmail1">Name*</label> <input pattern=".{3,}"
@@ -147,8 +147,7 @@
 		<div class="form-group">
 			<label for="exampleInputPassword1">Salary*</label> <input
 				pattern=".{3,}" type="text" class="form-control"
-				name="valor_receber" value="<%=instrutor.getValor_receber()%>"
-				name="valor_hora" id="teacher-salary" required>
+				value="<%=instrutor.getValor_hora()%>" name="valor_hora" id="teacher-salary" required>
 			<div class="invalid-feedback">Please digit teacher's salary,
 				min length 3.</div>
 		</div>
@@ -174,7 +173,7 @@
 	<%
 		} else if (curso != null) {
 	%>
-	<form method="post" action="admin/curso/edit" class="needs-validation"
+	<form method="post" action="/App/admin/curso/edit" class="needs-validation"
 		novalidate id="course-form">
 		<div class="form-group">
 			<label for="exampleInputEmail1">Name*</label> <input pattern=".{3,}"
@@ -221,7 +220,7 @@
 	<%
 		} else if (turma != null) {
 	%>
-	<form method="post" action="admin/turma/edit" class="needs-validation"
+	<form method="post" action="/App/admin/turma/edit" class="needs-validation"
 		novalidate id="class-form">
 		<label for="instrutorTurma">Select instructor*</label> <select
 			id="instrutorTurma" name="instrutor_id" class="custom-select">
@@ -300,7 +299,7 @@
 					data-parent="#accordionExample">
 					<div class="card-body">
 						<div class="courses-cards acordion-form">
-							<form method="post" action="admin/curso" class="needs-validation"
+							<form method="post" action="/App/admin/curso" class="needs-validation"
 								novalidate id="course-form">
 								<div class="form-group">
 									<label for="exampleInputEmail1">Name*</label> <input
@@ -356,7 +355,7 @@
 					data-parent="#accordionExample">
 					<div class="card-body">
 						<div class="courses-cards acordion-form">
-							<form method="post" action="admin/instrutor"
+							<form method="post" action="/App/admin/instrutor"
 								class="needs-validation" novalidate id="teacher-form">
 								<div class="form-group">
 									<label for="exampleInputEmail1">Name*</label> <input
@@ -446,7 +445,7 @@
 					aria-labelledby="headingFour" data-parent="#accordionExample">
 					<div class="card-body">
 						<div class="courses-cards acordion-form">
-							<form method="post" action="admin/turma" class="needs-validation"
+							<form method="post" action="/App/admin/turma" class="needs-validation"
 								novalidate id="class-form">
 								<label for="instrutorTurma">Select instructor*</label> <select
 									id="instrutorTurma" name="instrutores_id" class="custom-select">
@@ -508,7 +507,7 @@
 					data-parent="#accordionExample">
 					<div class="card-body">
 						<div class="courses-cards acordion-form">
-							<form method="post" action="admin/aluno" class="needs-validation"
+							<form method="post" action="/App/admin/alunos" class="needs-validation"
 								novalidate id="studant-form">
 								<div class="form-group">
 									<label for="exampleInputEmail1">Cpf*</label> <input
