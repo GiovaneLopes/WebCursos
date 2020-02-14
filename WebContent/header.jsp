@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%
-	int tipoUser = (int) session.getAttribute("tipoUser") > 0 ? 0 : (int) session.getAttribute("tipoUser");
+	int tipoUser = 0;
+	if (session.getAttribute("TipoUser") != null) {
+		tipoUser = (int) session.getAttribute("tipoUser");
+	}
 %>
 <!-- DOCTYPE html> -->
 <html>
@@ -12,13 +15,16 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <!-- FontAwesome -->
-<link rel="stylesheet" href="assets/fontawesome/css/all.css">
+<link rel="stylesheet"
+	href='<%=request.getContextPath() + "/assets/fontawesome/css/all.css"%>'>
 
 <!-- Css -->
-<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet"
+	href='<%=request.getContextPath() + "/assets/css/style.css"%>'>
 
 <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="assets/css/bootstrap.css">
+<link rel="stylesheet"
+	href='<%=request.getContextPath() + "/assets/css/bootstrap.css"%>'>
 
 <title>WebCursos</title>
 <script>
@@ -52,13 +58,13 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" href="index.jsp"><i
+				<li class="nav-item"><a class="nav-link" href="/App/index.jsp"><i
 						class="fas fa-home"></i> Home </a></li>
-				<li class="nav-item"><a class="nav-link" href="about.jsp"><i
+				<li class="nav-item"><a class="nav-link" href="/App/about.jsp"><i
 						class="far fa-building"></i> About</a></li>
-				<li class="nav-item"><a class="nav-link" href="comments.jsp"><i
+				<li class="nav-item"><a class="nav-link" href="/App/comments.jsp"><i
 						class="far fa-comment"></i> Comments </a></li>
-				<li class="nav-item"><a class="nav-link" href="teachers.jsp"><i
+				<li class="nav-item"><a class="nav-link" href="/App/teachers.jsp"><i
 						class="fas fa-graduation-cap"></i> Teachers</a></li>
 				<%
 					if (tipoUser == 1) {
@@ -69,14 +75,18 @@
 				<%
 					} else if (tipoUser == 3) {
 				%>
-				<li class="nav-item"><a class="nav-link" href="tables.jsp"><i
+				<li class="nav-item"><a class="nav-link" href="/App/tables.jsp"><i
 						class="fas fa-table"></i> Tables </a></li>
+				<li class="nav-item"><a class="nav-link" href="/App/admin/alunos"><i
+						class="fas fa-graduation-cap"></i> Alunos </a></li>
 				<%
 					} else {
 				%>
-				<li class="nav-item"><a class="nav-link " href="register.jsp"><i
+				<li class="nav-item"><a class="nav-link" href="/App/admin/alunos"><i
+						class="fas fa-graduation-cap"></i> Alunos </a></li>
+				<li class="nav-item"><a class="nav-link " href="/App/register.jsp"><i
 						class="far fa-user-circle"></i> Register </a></li>
-				<li class="nav-item"><a class="nav-link" href="signin.jsp"><i
+				<li class="nav-item"><a class="nav-link" href="/App/signin.jsp"><i
 						class="far fa-user"></i> Sign in</a></li>
 				<%
 					}

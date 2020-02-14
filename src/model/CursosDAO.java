@@ -29,9 +29,12 @@ public class CursosDAO {
 
             while( rs.next() ) {
                 Cursos cursos = new Cursos(); 
-                
                 cursos.setId(rs.getInt("id") );
                 cursos.setNome( rs.getString("nome") );
+                cursos.setCarga_horaria(Integer.parseInt(rs.getString("carga_horaria")));
+                cursos.setEmenta(rs.getString("ementa"));
+                cursos.setPreco(Double.parseDouble(rs.getString("preco")));
+                cursos.setRequisito(rs.getString("requisito"));
 
                 resultado.add(cursos);
             }
@@ -42,8 +45,8 @@ public class CursosDAO {
         return resultado;
     }
     
-    public Cursos getAlunoPorID( int codigo ) {
-        Cursos Cursos = new Cursos();
+    public Cursos getCursoPorID( int codigo ) {
+        Cursos cursos = new Cursos();
         try {
             String sql = "SELECT * FROM cursos WHERE id = ?";
             PreparedStatement ps = conexao.prepareStatement(sql);
@@ -52,32 +55,40 @@ public class CursosDAO {
             ResultSet rs = ps.executeQuery();
             
             if ( rs.next() ) {
-                Cursos.setId(rs.getInt("id"));
-                Cursos.setNome( rs.getString("nome") );
+            	cursos.setId(rs.getInt("id") );
+                cursos.setNome( rs.getString("nome") );
+                cursos.setCarga_horaria(Integer.parseInt(rs.getString("carga_horaria")));
+                cursos.setEmenta(rs.getString("ementa"));
+                cursos.setPreco(Double.parseDouble(rs.getString("preco")));
+                cursos.setRequisito(rs.getString("requisito"));
             }
             
         } catch( SQLException e ) {
             System.out.println("Erro de SQL: " + e.getMessage());
         }
-        return Cursos;
+        return cursos;
     }
     
-    public boolean gravar( Cursos Cursos ) {
+    public boolean gravar( Cursos cursos ) {
         try {
             String sql;
-            if ( Cursos.getId() == 0 ) {
+            if ( cursos.getId() == 0 ) {
                 // Realizar uma inclus�o
-                sql = "INSERT INTO cursos (nome, idade) VALUES (?,?)";
+                sql = "INSERT INTO cursos (nome, carga_horaria, ementa, preco, requisito) VALUES (?,?,?,?,?)";
             } else {
                 // Realizar uma altera��o
-                sql = "UPDATE cursos SET nome=?, idade=? WHERE id=?";
+                sql = "UPDATE cursos SET nome=?, carga_horaria=?, ementa=?, preco=?, requisito=? WHERE id=?";
             }
             
             PreparedStatement ps = conexao.prepareStatement(sql);
-            ps.setString(1, Cursos.getNome());
+            ps.setString(1, cursos.getNome());
+            ps.setInt(2, cursos.getCarga_horaria());
+            ps.setString(3, cursos.getEmenta());
+            ps.setDouble(4, cursos.getPreco());
+            ps.setString(5, cursos.getRequisito());
             
-            if ( Cursos.getId()> 0 )
-                ps.setInt(3, Cursos.getId());
+            if ( cursos.getId()> 0 )
+                ps.setInt(6, cursos.getId());
             
             ps.execute();
             

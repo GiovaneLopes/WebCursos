@@ -59,7 +59,7 @@ public class AlunosDAO {
             String sql = "SELECT alunos.*, matriculas.nota, turmas.id, cursos.nome " +
             			 "FROM alunos " +
             			 "LEFT JOIN matriculas " +
-            			 "ON alunos.id = matriculas.aluno_id " +
+            			 "ON alunos.id = matriculas.alunos_id " +
             			 "LEFT JOIN turmas " +
             			 "ON matriculas.turmas_id = turmas.id " +
             			 "LEFT JOIN cursos " +
@@ -179,8 +179,18 @@ public class AlunosDAO {
             ResultSet rs = ps.executeQuery();
             
             if ( rs.next() ) {
-                alunos.setId(rs.getInt("id"));
+            	alunos.setId(rs.getInt("id"));
                 alunos.setNome( rs.getString("nome") );
+                alunos.setAprovado(rs.getString("aprovado").charAt(0));
+                alunos.setBairro(rs.getString("bairro"));
+                alunos.setCelular(rs.getString("celular"));
+                alunos.setCep(rs.getString("cep"));
+                alunos.setCidade(rs.getString("cidade"));
+                alunos.setComentario(rs.getString("comentario"));
+                alunos.setCpf(rs.getString("cpf"));
+                alunos.setEmail(rs.getString("email"));
+                alunos.setEndereco(rs.getString("endereco"));
+                alunos.setLogin(rs.getString("login"));
             }
             
         } catch( SQLException e ) {
@@ -188,6 +198,25 @@ public class AlunosDAO {
             return null;
         }
         return alunos;
+    }
+    
+    public boolean aprovaAluno(Alunos aluno) {
+    	try {
+            String sql;
+            // Realizar uma altera��o
+            sql = "UPDATE alunos SET aprovado=? WHERE id=?";
+            
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setString(1, String.valueOf(aluno.getAprovado()));
+            ps.setInt(2, aluno.getId());
+            
+            ps.execute();
+            
+            return true;
+        } catch( SQLException e ) {
+            System.out.println("Erro de SQL: " + e.getMessage());
+            return false;
+        }
     }
     
     public boolean gravar( Alunos Alunos ) {
@@ -213,8 +242,10 @@ public class AlunosDAO {
             ps.setString(9, Alunos.getBairro());
             ps.setString(10, Alunos.getCep());
             
-            if ( Alunos.getId()> 0 )
+            if ( Alunos.getId()> 0 ) {
                 ps.setString(11, Alunos.getComentario());
+                ps.setInt(12, Alunos.getId());
+            }
             
             ps.execute();
             

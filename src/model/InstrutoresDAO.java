@@ -36,10 +36,18 @@ public class InstrutoresDAO {
 
             while( rs.next() ) {
                 Instrutores instrutor = new Instrutores(); 
+                if(rs.getString("nome") != null) {
+                	instrutor.setId(rs.getInt("id") );
+                    instrutor.setNome( rs.getString("nome") );
+                    instrutor.setExperiencia(rs.getString("experiencia"));
+                    instrutor.setEmail(rs.getString("email"));
+                    instrutor.setValor_hora(Integer.parseInt(rs.getString("valor_hora")));
+                    instrutor.setLogin(rs.getString("login"));
+                    
+                    int ch_total = Integer.parseInt(rs.getString("ch_total"));
+                    instrutor.setValor_receber(ch_total * instrutor.getValor_hora());
+                }
                 
-                instrutor.setId(rs.getInt("id") );
-                instrutor.setNome( rs.getString("nome") );
-
                 resultado.add(instrutor);
             }
         } catch( SQLException e ) {
@@ -50,7 +58,7 @@ public class InstrutoresDAO {
     }
     
     public Instrutores getInstrutoresPorID( int codigo ) {
-        Instrutores Instrutores = new Instrutores();
+        Instrutores instrutor = new Instrutores();
         try {
             String sql = "SELECT instrutores.*, sum(cursos.carga_horaria) as ch_total, turmas.* " + 
             			 "FROM instrutores " +
@@ -65,19 +73,25 @@ public class InstrutoresDAO {
             ResultSet rs = ps.executeQuery();
             
             if ( rs.next() ) {
-                Instrutores.setId(rs.getInt("id"));
-                Instrutores.setNome( rs.getString("nome") );
-                Instrutores.setValor_receber(rs.getInt("ch_total") * rs.getInt("valor_hora"));
+            	instrutor.setId(rs.getInt("id") );
+                instrutor.setNome( rs.getString("nome") );
+                instrutor.setExperiencia(rs.getString("experiencia"));
+                instrutor.setEmail(rs.getString("email"));
+                instrutor.setValor_hora(rs.getInt("valor_hora"));
+                instrutor.setLogin(rs.getString("login"));
+
+                int ch_total = rs.getInt("ch_total");
+                instrutor.setValor_receber(ch_total * instrutor.getValor_hora());
             }
             
         } catch( SQLException e ) {
             System.out.println("Erro de SQL: " + e.getMessage());
         }
-        return Instrutores;
+        return instrutor;
     }
     
     public Instrutores getLogin(String email, String senha) {
-    	Instrutores instrutores = new Instrutores();
+    	Instrutores instrutor = new Instrutores();
         try {
             String sql = "SELECT * FROM instrutores WHERE email = ? && senha = ?";
             PreparedStatement ps = conexao.prepareStatement(sql);
@@ -87,32 +101,43 @@ public class InstrutoresDAO {
             ResultSet rs = ps.executeQuery();
             
             if ( rs.next() ) {
-            	instrutores.setId(rs.getInt("id"));
-            	instrutores.setNome( rs.getString("nome") );
+            	instrutor.setId(rs.getInt("id") );
+                instrutor.setNome( rs.getString("nome") );
+                instrutor.setExperiencia(rs.getString("experiencia"));
+                instrutor.setEmail(rs.getString("email"));
+                instrutor.setValor_hora(rs.getInt("valor_hora"));
+                instrutor.setLogin(rs.getString("login"));
+
+                int ch_total = rs.getInt("ch_total");
+                instrutor.setValor_receber(ch_total * instrutor.getValor_hora());
             }
             
         } catch( SQLException e ) {
             System.out.println("Erro de SQL: " + e.getMessage());
         }
-        return instrutores;
+        return instrutor;
     }
     
-    public boolean gravar( Instrutores Instrutores ) {
+    public boolean gravar( Instrutores instrutor ) {
         try {
             String sql;
-            if ( Instrutores.getId() == 0 ) {
+            if ( instrutor.getId() == 0 ) {
                 // Realizar uma inclus�o
-                sql = "INSERT INTO contatos (nome, idade) VALUES (?,?)";
+                sql = "INSERT INTO contatos (nome, experiencia, email, valor_hora, login) VALUES (?,?)";
             } else {
                 // Realizar uma altera��o
-                sql = "UPDATE contatos SET nome=?, idade=? WHERE id=?";
+                sql = "UPDATE contatos SET nome=?, experiencia=?, email=?, valor_hora=?, login=? WHERE id=?";
             }
             
             PreparedStatement ps = conexao.prepareStatement(sql);
-            ps.setString(1, Instrutores.getNome());
+            ps.setString(1, instrutor.getNome());
+            ps.setString(2, instrutor.getExperiencia());
+            ps.setString(3, instrutor.getEmail());
+            ps.setInt(4, instrutor.getValor_hora());
+            ps.setString(5, instrutor.getLogin());
             
-            if ( Instrutores.getId()> 0 )
-                ps.setInt(3, Instrutores.getId());
+            if ( instrutor.getId()> 0 )
+                ps.setInt(3, instrutor.getId());
             
             ps.execute();
             

@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,19 +21,24 @@ public class TurmasDAO {
             System.out.println(e);
         }
     }
-    public ArrayList getLista() {
-        ArrayList resultado = new ArrayList();
+    public ArrayList<Turmas> getLista() {
+        ArrayList<Turmas> resultado = new ArrayList<Turmas>();
         try {            
             Statement stmt = conexao.createStatement();
 
             ResultSet rs = stmt.executeQuery("select * from turmas");
 
             while( rs.next() ) {
-                Turmas turmas = new Turmas(); 
+                Turmas turma = new Turmas(); 
                 
-                turmas.setId(rs.getInt("id") );
+                turma.setId(rs.getInt("id") );
+                turma.setCarga_horaria(rs.getInt("carga_horaria"));
+                turma.setCursos_id(rs.getInt("cursos_id"));
+                turma.setData_final(rs.getDate("data_final"));
+                turma.setData_inicio(rs.getDate("date"));
+                turma.setInstrutores_id(rs.getInt("instrutores_id"));
 
-                resultado.add(turmas);
+                resultado.add(turma);
             }
         } catch( SQLException e ) {
             System.out.println("Erro de SQL: " + e.getMessage());
@@ -41,8 +47,8 @@ public class TurmasDAO {
         return resultado;
     }
     
-    public Turmas getAlunoPorID( int codigo ) {
-        Turmas Turmas = new Turmas();
+    public Turmas getTurmaPorID( int codigo ) {
+        Turmas turma = new Turmas();
         try {
             String sql = "SELECT * FROM turmas WHERE id = ?";
             PreparedStatement ps = conexao.prepareStatement(sql);
@@ -51,13 +57,18 @@ public class TurmasDAO {
             ResultSet rs = ps.executeQuery();
             
             if ( rs.next() ) {
-                Turmas.setId(rs.getInt("id"));
+            	turma.setId(rs.getInt("id") );
+                turma.setCarga_horaria(rs.getInt("carga_horaria"));
+                turma.setCursos_id(rs.getInt("cursos_id"));
+                turma.setData_final(rs.getDate("data_final"));
+                turma.setData_inicio(rs.getDate("date"));
+                turma.setInstrutores_id(rs.getInt("instrutores_id"));
             }
             
         } catch( SQLException e ) {
             System.out.println("Erro de SQL: " + e.getMessage());
         }
-        return Turmas;
+        return turma;
     }
     
     public boolean gravar( Turmas Turmas ) {
@@ -65,16 +76,21 @@ public class TurmasDAO {
             String sql;
             if ( Turmas.getId() == 0 ) {
                 // Realizar uma inclus�o
-                sql = "INSERT INTO turmas (nome, idade) VALUES (?,?)";
+                sql = "INSERT INTO turmas (carga_horaria, cursos_id, instrutores_id, data_inicio, data_final) VALUES (?,?,?,?,?)";
             } else {
                 // Realizar uma altera��o
-                sql = "UPDATE turmas SET nome=?, idade=? WHERE id=?";
+                sql = "UPDATE turmas SET carga_horaria=?, cursos_id=?, instrutores_id=?, data_inicio=?, data_final=? WHERE id=?";
             }
             
             PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setInt(1, Turmas.getCarga_horaria());
+            ps.setInt(2, Turmas.getCursos_id());
+            ps.setInt(3, Turmas.getInstrutores_id());
+            ps.setDate(4, new Date(Turmas.getData_inicio().getTime()));
+            ps.setDate(5, new Date(Turmas.getData_final().getTime()));
             
             if ( Turmas.getId()> 0 )
-                ps.setInt(3, Turmas.getId());
+                ps.setInt(6, Turmas.getId());
             
             ps.execute();
             

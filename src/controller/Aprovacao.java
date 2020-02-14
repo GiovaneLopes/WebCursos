@@ -1,8 +1,9 @@
-package controller.admin;
+package controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,9 +32,8 @@ public class Aprovacao extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		AlunosDAO alunoDAO = new AlunosDAO();
-		ArrayList alunos = alunoDAO.getAlunosPendentes();
-		
+		RequestDispatcher resposta = request.getRequestDispatcher("../listAlunos.jsp");
+		resposta.forward(request, response);
 	}
 
 	/**
@@ -42,26 +42,17 @@ public class Aprovacao extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		char aprovado = request.getParameter("aprovado").toCharArray()[0];
 		AlunosDAO alunoDAO = new AlunosDAO();
+		boolean resultado = false;
 		if(aprovado == 'S') {
 			Alunos aluno = new Alunos();
 			aluno.setId(Integer.parseInt(request.getParameter("id")));
-			aluno.setNome(request.getParameter("nome"));
-			aluno.setEmail(request.getParameter("email"));
-			aluno.setSenha(request.getParameter("senha"));
-			aluno.setLogin(request.getParameter("login"));
-			aluno.setCpf(request.getParameter("cpf"));
-			aluno.setCelular(request.getParameter("celular"));
-			aluno.setEndereco(request.getParameter("endereco"));
-			aluno.setBairro(request.getParameter("Bairro"));
-			aluno.setCidade(request.getParameter("cidade"));
-			aluno.setCep(request.getParameter("cep"));
-			aluno.setComentario(request.getParameter("comentario"));
 			aluno.setAprovado('S');
 			
-			boolean resultado = alunoDAO.gravar(aluno);
-		} else {
-			alunoDAO.excluir(Integer.parseInt(request.getParameter("id")));
+			resultado = alunoDAO.aprovaAluno(aluno);
 		}
+		request.setAttribute("resultadoReq", resultado);
+		RequestDispatcher resposta = request.getRequestDispatcher("../listAlunos.jsp");
+		resposta.forward(request, response);
 	}
 
 }

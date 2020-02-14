@@ -46,16 +46,18 @@ public class FilterAccessAdmin implements Filter {
 		httpReq.setCharacterEncoding("UTF-8");
 		httpResp.setCharacterEncoding("UTF-8");
 		httpResp.setContentType("application/json");
-
-		String email = (String) session.getAttribute("email");
-		int tipoUser = (int) session.getAttribute("tipoUser");
-		System.out.println(email);
-		/*
-		 * if (email == null && tipoUser == 3) {
-		 *
-		 * httpResp.sendError(HttpServletResponse.SC_UNAUTHORIZED); } else {
-		 * chain.doFilter(request, response); }
-		 */
+		
+		if(session.getAttribute("email") == null || session.getAttribute("tipoUser") == null) {
+			// httpResp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+		} else {
+			String email = (String) session.getAttribute("email");
+			int tipoUser = (int) session.getAttribute("tipoUser");
+			if(tipoUser != 3) {
+				// httpResp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+			} else {
+				chain.doFilter(request, response);
+			}
+		}
 		chain.doFilter(request, response);
 	}
 

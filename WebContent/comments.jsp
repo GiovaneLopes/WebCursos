@@ -30,7 +30,7 @@
 			<%
 				} else {
 			%>
-			<img src="assets/images/teacher2.jpg" class="card-img-top" alt="...">
+			<img src='<%=request.getContextPath() + "/assets/images/teacher2.jpg"%>' class="card-img-top" alt="...">
 			<%
 				}
 			%>

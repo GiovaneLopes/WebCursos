@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,11 +29,15 @@ public class MatriculasDAO {
             ResultSet rs = stmt.executeQuery("select * from matriculas");
 
             while( rs.next() ) {
-                Matriculas matriculas = new Matriculas(); 
+                Matriculas matricula = new Matriculas(); 
                 
-                matriculas.setId(rs.getInt("id") );
+                matricula.setId(rs.getInt("id") );
+                matricula.setAlunos_id(rs.getInt("alunos_id"));
+                matricula.setData_matricula(rs.getDate("data_matricula"));
+                matricula.setNota(rs.getDouble("nota"));
+                matricula.setTurmas_id(rs.getInt("turmas_id"));
 
-                resultado.add(matriculas);
+                resultado.add(matricula);
             }
         } catch( SQLException e ) {
             System.out.println("Erro de SQL: " + e.getMessage());
@@ -42,7 +47,7 @@ public class MatriculasDAO {
     }
     
     public Matriculas getAlunoPorID( int codigo ) {
-        Matriculas Matriculas = new Matriculas();
+        Matriculas matricula = new Matriculas();
         try {
             String sql = "SELECT * FROM matriculas WHERE id = ?";
             PreparedStatement ps = conexao.prepareStatement(sql);
@@ -51,30 +56,38 @@ public class MatriculasDAO {
             ResultSet rs = ps.executeQuery();
             
             if ( rs.next() ) {
-                Matriculas.setId(rs.getInt("id"));
+            	matricula.setId(rs.getInt("id") );
+                matricula.setAlunos_id(rs.getInt("alunos_id"));
+                matricula.setData_matricula(rs.getDate("data_matricula"));
+                matricula.setNota(rs.getDouble("nota"));
+                matricula.setTurmas_id(rs.getInt("turmas_id"));
             }
             
         } catch( SQLException e ) {
             System.out.println("Erro de SQL: " + e.getMessage());
         }
-        return Matriculas;
+        return matricula;
     }
     
-    public boolean gravar( Matriculas Matriculas ) {
+    public boolean gravar( Matriculas matricula ) {
         try {
             String sql;
-            if ( Matriculas.getId() == 0 ) {
+            if ( matricula.getId() == 0 ) {
                 // Realizar uma inclus�o
-                sql = "INSERT INTO matriculas (nome, idade) VALUES (?,?)";
+                sql = "INSERT INTO matriculas (alunos_id, data_matricula, nota, turmas_id) VALUES (?,?,?,?)";
             } else {
                 // Realizar uma altera��o
-                sql = "UPDATE matriculas SET nome=?, idade=? WHERE id=?";
+                sql = "UPDATE matriculas SET alunos_id=?, data_matricula=?, nota=?, turmas_id=? WHERE id=?";
             }
             
             PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setInt(1, matricula.getAlunos_id());
+            ps.setDate(2, new Date(matricula.getData_matricula().getTime()));
+            ps.setDouble(3, matricula.getNota());
+            ps.setInt(4, matricula.getTurmas_id());
             
-            if ( Matriculas.getId()> 0 )
-                ps.setInt(3, Matriculas.getId());
+            if ( matricula.getId()> 0 )
+                ps.setInt(5, matricula.getId());
             
             ps.execute();
             

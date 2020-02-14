@@ -17,7 +17,7 @@ import utils.Alunos;
 /**
  * Servlet implementation class AdminAlunoController
  */
-@WebServlet("/admin/alunos/edit")
+@WebServlet("/admin/aluno/edit")
 public class AdminAlunoEditController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private AlunosDAO alunoDAO = new AlunosDAO();
@@ -37,8 +37,8 @@ public class AdminAlunoEditController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		aluno = alunoDAO.getAlunoPorID(id);
-		request.setAttribute("obetoToUpdate", aluno);
-		RequestDispatcher resposta = request.getRequestDispatcher("tables.jsp");
+		request.setAttribute("objetoToUpdate", aluno);
+		RequestDispatcher resposta = request.getRequestDispatcher("../../tables.jsp");
 		resposta.forward(request, response);
 	}
 
@@ -62,6 +62,10 @@ public class AdminAlunoEditController extends HttpServlet {
 		aluno.setAprovado(request.getParameter("aprovado").charAt(0));
 		
 		boolean resultado = alunoDAO.gravar(aluno);
+		request.setAttribute("objetoToUpdate", aluno);
+		request.setAttribute("resultadoReq", resultado);
+		RequestDispatcher resposta = request.getRequestDispatcher("../../tables.jsp");
+		resposta.forward(request, response);
 	}
 
 }

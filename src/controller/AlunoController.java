@@ -67,15 +67,8 @@ public class AlunoController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		RequestDispatcher resposta = request.getRequestDispatcher("tables.html");
+		RequestDispatcher resposta = request.getRequestDispatcher("register.jsp");
 		resposta.forward(request, response);
-		PrintWriter out = response.getWriter();
-
-        out.println("<html>");
-        out.println("<body>");
-        out.println("<p>Ola cheguei no doGet</p>");
 	}
 
 	/**

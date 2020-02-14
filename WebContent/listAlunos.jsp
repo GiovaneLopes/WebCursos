@@ -9,6 +9,15 @@
 %>
 
 <div class="container">
+	<%
+		if (request.getAttribute("resultadoReq") != null) {
+			if ((boolean) request.getAttribute("resultadoReq") == true) {
+				out.print("<div class='alert alert-success' role='alert'>Usuário aprovado com sucesso!</div>");
+			} else {
+				out.print("<div class='alert alert-danger' role='alert'>Erro ao cadastrar usuário!</div>");
+			}
+		}
+	%>
 	<div class="principal-title">
 		<h1 class="welcome">Our Students!</h1>
 		<p>Lorem Ipsum is simply dummy text of the printing and
@@ -30,7 +39,7 @@
 			<%
 				} else {
 			%>
-			<img src="assets/images/teacher2.jpg" class="card-img-top" alt="...">
+			<img src='<%=request.getContextPath() + "/assets/images/teacher2.jpg"%>' class="card-img-top" alt="...">
 			<%
 				}
 			%>
@@ -61,13 +70,21 @@
 						<li>Aprovado: <%=alunos.get(i).getAprovado()%>
 						</li>
 					</ul>
+					<% if(alunos.get(i).getAprovado() == 'N') { %>
+					<form action="/App/admin/aprovacao" method="post">
+						<input type="hidden" value="<%= alunos.get(i).getId() %>" name="id">
+						<input type="hidden" value="S" name="aprovado">
+						<button type="submit" class="btn btn-success">Aprovar aluno</button>
+					</form>
+					<% } %>
+					<a href="/App/admin/aluno/edit?id=<%= alunos.get(i).getId() %>"><button type="button" class="btn btn-primary">Editar</button></a>
 				</div>
 			</div>
 		</div>
 		<%
 			}
 		%>
-
+		
 	</div>
 </div>
 <jsp:include page="footer.jsp"></jsp:include>
