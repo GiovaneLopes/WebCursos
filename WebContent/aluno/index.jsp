@@ -3,7 +3,6 @@
 <%@ page
 	import="model.AlunosDAO, utils.Alunos, java.util.ArrayList, java.io.File"%>
 <%
-	out.print(session.getAttribute("userId"));
 	AlunosDAO alunosDAO = new AlunosDAO();
 	Alunos aluno = alunosDAO.getAlunoPorID((int) session.getAttribute("userId"));
 %>

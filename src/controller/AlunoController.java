@@ -87,7 +87,6 @@ public class AlunoController extends HttpServlet {
 		aluno.setCidade(request.getParameter("cidade"));
 		aluno.setCep(request.getParameter("cep"));
 		aluno.setComentario(request.getParameter("comentario"));
-		
 		AlunosDAO alunoDAO = new AlunosDAO();
 		boolean resultado = alunoDAO.gravar(aluno);
 		request.setAttribute("resultadoReq", resultado);

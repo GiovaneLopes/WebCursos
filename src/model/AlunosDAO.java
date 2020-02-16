@@ -122,7 +122,7 @@ public class AlunosDAO {
         
         return resultado;
     }
-    
+        
     public ArrayList<Alunos> getAlunosInstrutores(int id_turmas){
     	ArrayList<Alunos> resultado = new ArrayList();
         try {            
@@ -155,6 +155,7 @@ public class AlunosDAO {
                 Matriculas matricula = new Matriculas();
                 matricula.setAlunos_id(rs.getInt("id"));
                 matricula.setNota(rs.getDouble("nota"));
+                matricula.setTurmas_id(rs.getInt("turmas_id"));
                 ArrayList<Matriculas> matriculas = new ArrayList<Matriculas>();
                 matriculas.add(matricula);
                 alunos.setMatriculas(matriculas);

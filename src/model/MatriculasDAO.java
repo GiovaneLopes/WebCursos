@@ -21,8 +21,8 @@ public class MatriculasDAO {
             System.out.println(e);
         }
     }
-    public ArrayList getLista() {
-        ArrayList resultado = new ArrayList();
+    public ArrayList<Matriculas> getLista() {
+    	ArrayList<Matriculas> resultado = new ArrayList<Matriculas>();
         try {            
             Statement stmt = conexao.createStatement();
 
@@ -46,7 +46,7 @@ public class MatriculasDAO {
         return resultado;
     }
     
-    public Matriculas getAlunoPorID( int codigo ) {
+    public Matriculas getMatriculaPorID( int codigo ) {
         Matriculas matricula = new Matriculas();
         try {
             String sql = "SELECT * FROM matriculas WHERE id = ?";
@@ -67,6 +67,33 @@ public class MatriculasDAO {
             System.out.println("Erro de SQL: " + e.getMessage());
         }
         return matricula;
+    }
+    
+    public ArrayList<Matriculas> getMatriculasPorAluno(int id_aluno ) {
+    	ArrayList<Matriculas> resultado = new ArrayList<Matriculas>();
+        try {            
+            String sql = "SELECT * FROM matriculas LEFT JOIN alunos ON matriculas.alunos_id = alunos.id WHERE alunos.id = ?";
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setInt(1, id_aluno);
+            
+            ResultSet rs = ps.executeQuery();
+
+            while( rs.next() ) {
+                Matriculas matricula = new Matriculas(); 
+                
+                matricula.setId(rs.getInt("id") );
+                matricula.setAlunos_id(rs.getInt("alunos_id"));
+                matricula.setData_matricula(rs.getDate("data_matricula"));
+                matricula.setNota(rs.getDouble("nota"));
+                matricula.setTurmas_id(rs.getInt("turmas_id"));
+
+                resultado.add(matricula);
+            }
+        } catch( SQLException e ) {
+            System.out.println("Erro de SQL: " + e.getMessage());
+        }
+        
+        return resultado;
     }
     
     public boolean gravar( Matriculas matricula ) {
