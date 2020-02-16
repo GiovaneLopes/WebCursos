@@ -169,12 +169,35 @@ public class AlunosDAO {
         return resultado;
     }
 
-    public Alunos getLogin(String email, String senha) {
+    public String getNomePorMatricula(int id_matricula) {
+        try {
+            String sql = "SELECT alunos.*, matriculas.nota, turmas.id, cursos.nome " +
+            			 "FROM alunos " +
+            			 "LEFT JOIN matriculas " +
+            			 "ON alunos.id = matriculas.alunos_id " +
+            			 "WHERE matriculas.id = ?";
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setInt(1, id_matricula);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            if ( rs.next() ) {
+                return rs.getString("nome");
+            }
+            
+        } catch( SQLException e ) {
+            System.out.println("Erro de SQL: " + e.getMessage());
+            return null;
+        }
+        return null;
+    }
+    
+    public Alunos getLogin(String login, String senha) {
     	Alunos alunos = new Alunos();
         try {
-            String sql = "SELECT * FROM alunos WHERE email = ? && senha = ?";
+            String sql = "SELECT * FROM alunos WHERE login = ? && senha = ?";
             PreparedStatement ps = conexao.prepareStatement(sql);
-            ps.setString(1, email);
+            ps.setString(1, login);
             ps.setString(2, senha);
             
             ResultSet rs = ps.executeQuery();

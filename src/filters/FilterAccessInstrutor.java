@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class FilterAccessInstrutor
  */
-@WebFilter("/FilterAccessInstrutor")
+@WebFilter( urlPatterns = { "/instrutor/*" }, servletNames = { "InstrutorController" })
 public class FilterAccessInstrutor implements Filter {
 
     /**

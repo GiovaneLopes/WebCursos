@@ -15,6 +15,15 @@
 	</div>
 	<div class="courses-cards">
 		<%
+			if (request.getAttribute("resultadoReq") != null) {
+				if ((boolean) request.getAttribute("resultadoReq") == true) {
+					out.print("<div class='alert alert-success' role='alert'>Matricula realizada com sucesso!</div>");
+				} else {
+					out.print("<div class='alert alert-danger' role='alert'>Nao ha turmas disponiveis!</div>");
+				}
+			}
+		%>
+		<%
 			for (int i = 0; i < cursos.size(); i++) {
 		%>
 		<div class="card card-courses" style="width: 18rem;">
@@ -36,10 +45,10 @@
 				}
 			%>
 			<div class="card-body card-body-courses">
-				<h5 class="card-title course-title"><%= cursos.get(i).getNome() %></h5>
-				<p class="course-title p-title"><%= cursos.get(i).getPreco() %></p>
-				<a href="#" class="btn btn-success"><i
-					class="fas fa-dollar-sign"></i> Buy</a>
+				<h5 class="card-title course-title"><%=cursos.get(i).getNome()%></h5>
+				<p class="course-title p-title"><%=cursos.get(i).getPreco()%></p>
+				<a href="/App/aluno/matricula?id_curso=<%=cursos.get(i).getId()%>"
+					class="btn btn-success"><i class="fas fa-dollar-sign"></i> Buy</a>
 			</div>
 		</div>
 		<%

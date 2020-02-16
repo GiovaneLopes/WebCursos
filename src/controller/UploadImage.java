@@ -17,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -62,12 +63,12 @@ public class UploadImage extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		HttpSession session = request.getSession();
 		Part filePart = request.getPart("file"); // Retrieves <input type="file" name="file">
 	    InputStream fileContent = filePart.getInputStream();
 	    String root = getServletContext().getRealPath("/");
 	    String dir = root + "/assets/fotos/alunos/";
-	    String idAluno = request.getParameter("idAluno"); // Mudar para pegar o id na sessao do usuario
-	    idAluno = "2";
+	    String idAluno = (String) session.getAttribute("userId");
 	    String filename = idAluno + ".png";
 	    
 	    try{

@@ -48,16 +48,14 @@ public class LoginController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String email= request.getParameter("email");
+		String login= request.getParameter("login");
 		String password = (String) request.getAttribute("senha");
 		int tipoUser = Integer.parseInt(request.getParameter("tipoUser"));
 		
-		int resultado = doLogin(tipoUser, email, password);
-		System.out.println(password);
-		System.out.println(resultado);
+		int resultado = doLogin(tipoUser, login, password);
 		if(resultado > 0) {
 			HttpSession session = request.getSession();
-			session.setAttribute("email", email);
+			session.setAttribute("login", login);
 			session.setAttribute("tipoUser", tipoUser);
 			session.setAttribute("userId", resultado);
 			request.setAttribute("resultadoReq", true);
@@ -68,11 +66,11 @@ public class LoginController extends HttpServlet {
 		resposta.forward(request, response);
 	}
 	
-	public int doLogin(int tipoUser, String email, String senha) {
+	public int doLogin(int tipoUser, String login, String senha) {
     	switch(tipoUser) {
     		case 1: 
     			AlunosDAO aluno = new AlunosDAO();
-    			Alunos resultAluno = aluno.getLogin(email, senha);
+    			Alunos resultAluno = aluno.getLogin(login, senha);
     			if(resultAluno.getNome() != null) {
     				System.out.println("Sucesso no login");
     				return resultAluno.getId();
@@ -81,14 +79,14 @@ public class LoginController extends HttpServlet {
     			break;
     		case 2:
     			InstrutoresDAO instrutor = new InstrutoresDAO();
-    			Instrutores resultInstrutor = instrutor.getLogin(email, senha);
+    			Instrutores resultInstrutor = instrutor.getLogin(login, senha);
     			if(resultInstrutor.getNome() != null) {
     				return resultInstrutor.getId();
     			}
     			break;
     		case 3:
     			LoginDAO admin = new LoginDAO();
-    			return admin.doLoginAdmin(email, senha);
+    			return admin.doLoginAdmin(login, senha);
     	}
     	return 0;
     }

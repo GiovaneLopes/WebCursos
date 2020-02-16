@@ -22,11 +22,11 @@ public class LoginDAO {
         }
     }
     
-    public int doLoginAdmin(String email, String senha) {
+    public int doLoginAdmin(String login, String senha) {
     	try {
-            String sql = "SELECT * FROM instrutores WHERE email = ? && senha = ?";
+            String sql = "SELECT * FROM instrutores WHERE login = ? && senha = ?";
             PreparedStatement ps = conexao.prepareStatement(sql);
-            ps.setString(1, email);
+            ps.setString(1, login);
             ps.setString(2, senha);
             
             ResultSet rs = ps.executeQuery();

@@ -71,6 +71,63 @@ public class TurmasDAO {
         return turma;
     }
     
+    public ArrayList<Turmas> getTurmasPorInstrutor(int id_instrutor) {
+        ArrayList<Turmas> resultado = new ArrayList<Turmas>();
+        try {            
+            Statement stmt = conexao.createStatement();
+            String sql = "select * from turmas WHERE instrutores_id = ?";
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setInt(1, id_instrutor);
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while( rs.next() ) {
+                Turmas turma = new Turmas(); 
+                
+                turma.setId(rs.getInt("id") );
+                turma.setCarga_horaria(rs.getInt("carga_horaria"));
+                turma.setCursos_id(rs.getInt("cursos_id"));
+                turma.setData_final(rs.getDate("data_final"));
+                turma.setData_inicio(rs.getDate("date"));
+                turma.setInstrutores_id(rs.getInt("instrutores_id"));
+
+                resultado.add(turma);
+            }
+        } catch( SQLException e ) {
+            System.out.println("Erro de SQL: " + e.getMessage());
+        }
+        
+        return resultado;
+    }
+    
+    public ArrayList<Turmas> getTurmasPorCurso(int id_curso) {
+        ArrayList<Turmas> resultado = new ArrayList<Turmas>();
+        try {            
+            Statement stmt = conexao.createStatement();
+            String sql = "select * from turmas WHERE curso_id = ?";
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setInt(1, id_curso);
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while( rs.next() ) {
+                Turmas turma = new Turmas(); 
+                
+                turma.setId(rs.getInt("id") );
+                turma.setCarga_horaria(rs.getInt("carga_horaria"));
+                turma.setCursos_id(rs.getInt("cursos_id"));
+                turma.setData_final(rs.getDate("data_final"));
+                turma.setData_inicio(rs.getDate("date"));
+                turma.setInstrutores_id(rs.getInt("instrutores_id"));
+
+                resultado.add(turma);
+            }
+        } catch( SQLException e ) {
+            System.out.println("Erro de SQL: " + e.getMessage());
+        }
+        
+        return resultado;
+    }
+
+
     public boolean gravar( Turmas Turmas ) {
         try {
             String sql;

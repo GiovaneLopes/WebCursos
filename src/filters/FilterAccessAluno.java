@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class FilterAccessAluno
  */
-@WebFilter("/FilterAccessAluno")
+@WebFilter( urlPatterns = { "/aluno/*", "/upload.jsp" }, servletNames = { "UploadImage" })
 public class FilterAccessAluno implements Filter {
 
     /**
@@ -43,6 +43,10 @@ public class FilterAccessAluno implements Filter {
 		httpReq.setCharacterEncoding("UTF-8");
 		httpResp.setCharacterEncoding("UTF-8");
 		httpResp.setContentType("application/json");
+		if(session.getAttribute("email") == null || session.getAttribute("tipoUser") == null) {
+			httpResp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+			return;
+		} 
 
 		String email = (String) session.getAttribute("email");
 		int tipoUser = (int) session.getAttribute("tipoUser");

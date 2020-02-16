@@ -63,6 +63,7 @@
 
 	</div>
 </div>
+<jsp:include page="../footer.jsp"></jsp:include>
 <script>
 	$('form#deletar_turma').submit(function(ev) {
 		ev.preventDefault()
@@ -82,4 +83,3 @@
 		});
 	})
 </script>
-<jsp:include page="../footer.jsp"></jsp:include>

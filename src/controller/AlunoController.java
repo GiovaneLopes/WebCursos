@@ -18,7 +18,7 @@ import utils.Alunos;
 /**
  * Servlet implementation class Aluno
  */
-@WebServlet("/aluno")
+@WebServlet("/register")
 public class AlunoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

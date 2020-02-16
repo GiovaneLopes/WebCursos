@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
  * Servlet Filter implementation class FilterAccess
  */
 @WebFilter(dispatcherTypes = { DispatcherType.REQUEST }, urlPatterns = { "/FilterAccessAdmin", "/admin/*",
-		"/instrutor/*", "/tables.jsp", "/upload.jsp", "/listAlunos.jsp" }, servletNames = { "UploadImage" })
+		"/instrutor/*", "/tables.jsp", "/admin/upload.jsp", "/listAlunos.jsp" }, servletNames = { "AdminUploadImage" })
 public class FilterAccessAdmin implements Filter {
 
 	/**
@@ -48,12 +48,12 @@ public class FilterAccessAdmin implements Filter {
 		httpResp.setContentType("application/json");
 		
 		if(session.getAttribute("email") == null || session.getAttribute("tipoUser") == null) {
-			// httpResp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+			httpResp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
 		} else {
 			String email = (String) session.getAttribute("email");
 			int tipoUser = (int) session.getAttribute("tipoUser");
 			if(tipoUser != 3) {
-				// httpResp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+				httpResp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
 			} else {
 				chain.doFilter(request, response);
 			}

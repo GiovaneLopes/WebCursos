@@ -84,12 +84,12 @@ public class InstrutoresDAO {
 		return instrutor;
 	}
 
-	public Instrutores getLogin(String email, String senha) {
+	public Instrutores getLogin(String login, String senha) {
 		Instrutores instrutor = new Instrutores();
 		try {
-			String sql = "SELECT * FROM instrutores WHERE email = ? && senha = ?";
+			String sql = "SELECT * FROM instrutores WHERE login = ? && senha = ?";
 			PreparedStatement ps = conexao.prepareStatement(sql);
-			ps.setString(1, email);
+			ps.setString(1, login);
 			ps.setString(2, senha);
 
 			ResultSet rs = ps.executeQuery();

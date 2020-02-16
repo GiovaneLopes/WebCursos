@@ -18,10 +18,10 @@
 		<form method="post" action="login" class="needs-validation" novalidate
 			id="signinForm">
 			<div class="form-group">
-				<label for="exampleInputEmail1">Email address</label> <input
-					type="email" class="form-control" id="exampleInputEmail1"
-					name="email" aria-describedby="emailHelp" required>
-				<div class="invalid-feedback">Please digit your e-mail.</div>
+				<label for="exampleInputEmail1">Login</label> <input
+					type="text" class="form-control" id="exampleInputEmail1"
+					name="login" aria-describedby="emailHelp" required>
+				<div class="invalid-feedback">Please digit your login.</div>
 			</div>
 			<div class="form-group">
 				<label for="exampleInputPassword1">Password</label> <input

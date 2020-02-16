@@ -73,9 +73,13 @@
 				%>
 				<li class="nav-item"><a class="nav-link" href="/App/upload.jsp"><i
 						class="fas fa-image"></i>Upload de foto</a></li>
+				<li class="nav-item"><a class="nav-link" href="/App/aluno/index.jsp"><i
+						class="fas fa-user"></i>Minha pagina</a></li>
 				<%
 					} else if (tipoUser == 2) {
 				%>
+				<li class="nav-item"><a class="nav-link" href="/App/instrutor/index.jsp"><i
+						class="fas fa-user"></i>Minha pagina</a></li>
 				<%
 					} else if (tipoUser == 3) {
 				%>
@@ -93,18 +97,6 @@
 				<%
 					} else {
 				%>
-				<li class="nav-item"><a class="nav-link"
-					href="/App/upload.jsp"><i class="fas fa-image"></i>Upload
-						de foto</a></li>
-				<li class="nav-item"><a class="nav-link"
-					href="/App/admin/cursos.jsp"><i class="fas fa-graduation-cap"></i>
-						Cursos</a></li>
-				<li class="nav-item"><a class="nav-link"
-					href="/App/admin/turmas.jsp"><i class="fas fa-graduation-cap"></i>
-						Turmas</a></li>
-				<li class="nav-item"><a class="nav-link"
-					href="/App/admin/alunos"><i class="fas fa-graduation-cap"></i>
-						Alunos </a></li>
 				<li class="nav-item"><a class="nav-link "
 					href="/App/register.jsp"><i class="far fa-user-circle"></i>
 						Register </a></li>
