@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet Filter implementation class FilterLogin
  */
-@WebFilter(urlPatterns = { "/FilterPass", "/login", "/admin/*" }, servletNames = { "LoginController", "AlunoController" })
+@WebFilter(urlPatterns = { "/*"})
 public class FilterPass implements Filter {
 
 	/**

@@ -9,6 +9,15 @@
 %>
 
 <div class="container">
+	<%
+		if (request.getAttribute("resultadoReq") != null) {
+			if ((boolean) request.getAttribute("resultadoReq") == true) {
+				out.print("<div class='alert alert-success' role='alert'>Ação realizada com sucesso'!</div>");
+			} else {
+				out.print("<div class='alert alert-danger' role='alert'>Erro ao realizar ação!</div>");
+			}
+		}
+	%>
 	<div class="principal-title">
 		<h1 class="welcome">Meet our teachers!</h1>
 		<p>Lorem Ipsum is simply dummy text of the printing and
@@ -21,16 +30,20 @@
 		%>
 		<div class="card card-courses" style="width: 18rem;">
 			<%
-				File image = new File(System.getProperty("user.home") + "/fotos/instrutores/" + instrutores.get(i).getId());
+				File image = new File(
+							request.getContextPath() + "/assets/fotos/instrutores/" + instrutores.get(i).getId() + ".png");
 					if (image.exists() && image.isFile()) {
 			%>
 			<img
-				src="<%=System.getProperty("user.home") + "/fotos/instrutores/" + instrutores.get(i).getId()%>"
+				src='<%=request.getContextPath() + "/assets/fotos/instrutores/" + instrutores.get(i).getId()
+							+ ".png"%>'
 				class="card-img-top" alt="...">
 			<%
 				} else {
 			%>
-			<img  src='<%=request.getContextPath() + "/assets/images/teacher2.jpg"%>' class="card-img-top" alt="...">
+			<img
+				src='<%=request.getContextPath() + "/assets/images/teacher2.jpg"%>'
+				class="card-img-top" alt="...">
 			<%
 				}
 			%>
@@ -51,13 +64,23 @@
 						<li>Valor a receber: <%=instrutores.get(i).getValor_receber()%>
 						</li>
 					</ul>
-					<% //if(session.getAttribute("tipoUser") != null && (int) session.getAttribute("tipoUser") == 3) { %>
+					<%
+						//if(session.getAttribute("tipoUser") != null && (int) session.getAttribute("tipoUser") == 3) {
+					%>
 					<form id="deletar_professor">
-						<input type="hidden" value="<%= instrutores.get(i).getId() %>" name="id">
-						<button type="submit" class="btn btn-danger">Deletar professor</button>
+						<input type="hidden" value="<%=instrutores.get(i).getId()%>"
+							name="id">
+						<button type="submit" class="btn btn-danger">Deletar
+							professor</button>
 					</form>
-					<a href="/App/admin/instrutor/edit?id=<%= instrutores.get(i).getId() %>"><button type="button" class="btn btn-primary">Editar</button></a>
-					<%// } %>
+					<a
+						href="/App/admin/instrutor/edit?id=<%=instrutores.get(i).getId()%>"><button
+							type="button" class="btn btn-primary">Editar</button></a> <a
+						href="/App/admin/upload?id=<%=instrutores.get(i).getId()%>&classe=instrutores"><button
+							type="button" class="btn btn-primary">Upload de imagem</button></a>
+					<%
+						// }
+					%>
 				</div>
 			</div>
 		</div>
@@ -69,20 +92,21 @@
 </div>
 <jsp:include page="footer.jsp"></jsp:include>
 <script>
-	$('form#deletar_professor').submit(function(ev){
+	$('form#deletar_professor').submit(function(ev) {
 		ev.preventDefault()
 		let id_professor = $(this).children('input[name=id]').val().trim()
 		$.ajax({
-		    url: '/App/admin/instrutor?id=' + id_professor,
-		    type: 'DELETE',
-		    complete: function(result) {
-		    	console.log(result)
-		    	if(result.status == 200) {
-		    		alert("Professor deletado!")
-		    	} else {
-		    		alert("Erro ao deletar professor")
-		    	}
-		    },
+			url : '/App/admin/instrutor?id=' + id_professor,
+			type : 'DELETE',
+			complete : function(result) {
+				console.log(result)
+				if (result.status == 200) {
+					alert("Professor deletado!")
+					location.reload()
+				} else {
+					alert("Erro ao deletar professor")
+				}
+			},
 		});
 	})
 </script>

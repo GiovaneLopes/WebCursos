@@ -12,9 +12,9 @@
 	<%
 		if (request.getAttribute("resultadoReq") != null) {
 			if ((boolean) request.getAttribute("resultadoReq") == true) {
-				out.print("<div class='alert alert-success' role='alert'>Usuário aprovado com sucesso!</div>");
+				out.print("<div class='alert alert-success' role='alert'>Usuï¿½rio aprovado com sucesso!</div>");
 			} else {
-				out.print("<div class='alert alert-danger' role='alert'>Erro ao cadastrar usuário!</div>");
+				out.print("<div class='alert alert-danger' role='alert'>Erro ao cadastrar usuï¿½rio!</div>");
 			}
 		}
 	%>
@@ -30,11 +30,11 @@
 		%>
 		<div class="card card-courses" style="width: 18rem;">
 			<%
-				File image = new File(System.getProperty("user.home") + "/fotos/alunos/" + alunos.get(i).getId());
+				File image = new File( request.getContextPath() + "/assets/fotos/alunos/" + alunos.get(i).getId() + ".png");
 					if (image.exists() && image.isFile()) {
 			%>
 			<img
-				src="<%=System.getProperty("user.home") + "/fotos/alunos/" + alunos.get(i).getId()%>"
+				src='<%= request.getContextPath() + "/assets/fotos/alunos/" + alunos.get(i).getId() + ".png"%>'
 				class="card-img-top" alt="...">
 			<%
 				} else {
@@ -77,6 +77,11 @@
 						<button type="submit" class="btn btn-success">Aprovar aluno</button>
 					</form>
 					<% } %>
+					<form id="deletar_aluno">
+						<input type="hidden" value="<%=alunos.get(i).getId()%>"
+							name="id">
+						<button type="submit" class="btn btn-danger">Deletar</button>
+					</form>
 					<a href="/App/admin/aluno/edit?id=<%= alunos.get(i).getId() %>"><button type="button" class="btn btn-primary">Editar</button></a>
 				</div>
 			</div>
@@ -88,3 +93,22 @@
 	</div>
 </div>
 <jsp:include page="footer.jsp"></jsp:include>
+<script>
+	$('form#deletar_aluno').submit(function(ev) {
+		ev.preventDefault()
+		let id_aluno = $(this).children('input[name=id]').val().trim()
+		$.ajax({
+			url : '/App/admin/alunos?id=' + id_aluno,
+			type : 'DELETE',
+			complete : function(result) {
+				console.log(result)
+				if (result.status == 200) {
+					alert("Aluno deletado!")
+					location.reload()
+				} else {
+					alert("Erro ao deletar aluno")
+				}
+			},
+		});
+	})
+</script>

@@ -46,7 +46,7 @@ public class AdminAlunoController extends HttpServlet {
 		aluno = new Alunos();
 		aluno.setNome(request.getParameter("nome"));
 		aluno.setEmail(request.getParameter("email"));
-		aluno.setSenha(request.getParameter("senha"));
+		aluno.setSenha((String) request.getAttribute("senha"));
 		aluno.setLogin(request.getParameter("login"));
 		aluno.setCpf(request.getParameter("cpf"));
 		aluno.setCelular(request.getParameter("celular"));
@@ -64,9 +64,17 @@ public class AdminAlunoController extends HttpServlet {
 
 	@Override
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println(request.getParameter("id"));
+		if (request.getParameter("id") == null || Integer.parseInt(request.getParameter("id")) == 0) {
+			response.sendError(400, "Id invalido");
+		}
 		aluno = new Alunos();
 		aluno.setId(Integer.parseInt(request.getParameter("id")));
-		alunoDAO.excluir(aluno.getId());
+		if(alunoDAO.excluir(aluno.getId()) == true) {
+			response.getWriter().write("{isSuccess: true}");
+		} else {
+			response.sendError(400, "Id invalido");
+		}
 	}
 
 	@Override
@@ -75,7 +83,7 @@ public class AdminAlunoController extends HttpServlet {
 		aluno.setId(Integer.parseInt(request.getParameter("id")));
 		aluno.setNome(request.getParameter("nome"));
 		aluno.setEmail(request.getParameter("email"));
-		aluno.setSenha(request.getParameter("senha"));
+		aluno.setSenha((String) request.getAttribute("senha"));
 		aluno.setLogin(request.getParameter("login"));
 		aluno.setCpf(request.getParameter("cpf"));
 		aluno.setCelular(request.getParameter("celular"));

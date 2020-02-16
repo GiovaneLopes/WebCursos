@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -50,7 +51,8 @@ public class UploadImage extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		getServletContext().getRequestDispatcher("/upload.html").forward(request, response);
+		RequestDispatcher resposta = request.getRequestDispatcher("/upload.jsp");
+		resposta.forward(request, response);
 	}
 
 	/**
@@ -62,9 +64,10 @@ public class UploadImage extends HttpServlet {
 
 		Part filePart = request.getPart("file"); // Retrieves <input type="file" name="file">
 	    InputStream fileContent = filePart.getInputStream();
-	    String dir = System.getProperty("user.home") +  "/fotos/alunos/";
+	    String root = getServletContext().getRealPath("/");
+	    String dir = root + "/assets/fotos/alunos/";
 	    String idAluno = request.getParameter("idAluno"); // Mudar para pegar o id na sessao do usuario
-	    idAluno = "1";
+	    idAluno = "2";
 	    String filename = idAluno + ".png";
 	    
 	    try{
@@ -72,6 +75,7 @@ public class UploadImage extends HttpServlet {
 	    } 
 	    catch(SecurityException se){
 	    	System.out.println("security: " + se);
+	    	request.setAttribute("resultadoReq", false);
 	    }        
 	    
 	    File file = new File(dir, filename);
@@ -79,6 +83,12 @@ public class UploadImage extends HttpServlet {
 	        Files.copy(input, file.toPath());
 	    } catch(Exception e) {
 	    	System.out.println(e);
+	    	request.setAttribute("resultadoReq", false);	
 	    }
+	    if(request.getAttribute("resultadoReq") == null) {
+			request.setAttribute("resultadoReq", true);	
+		}
+		RequestDispatcher resposta = request.getRequestDispatcher("/aluno/index.jsp");
+		resposta.forward(request, response);
 	}
 }

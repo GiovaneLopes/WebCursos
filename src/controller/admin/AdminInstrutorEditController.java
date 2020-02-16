@@ -55,7 +55,7 @@ public class AdminInstrutorEditController extends HttpServlet {
 		instrutor.setId(Integer.parseInt(request.getParameter("id")));
 		instrutor.setNome(request.getParameter("nome"));
 		instrutor.setEmail(request.getParameter("email"));
-		instrutor.setSenha(request.getParameter("senha"));
+		instrutor.setSenha((String) request.getAttribute("senha"));
 		instrutor.setLogin(request.getParameter("login"));
 		instrutor.setSenha((String)request.getAttribute("senha"));
 		instrutor.setExperiencia(request.getParameter("experiencia"));

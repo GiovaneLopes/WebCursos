@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
  * Servlet Filter implementation class FilterAccess
  */
 @WebFilter(dispatcherTypes = { DispatcherType.REQUEST }, urlPatterns = { "/FilterAccessAdmin", "/admin/*",
-		"/instrutor/*", "/tables.jsp", "/upload.jsp", }, servletNames = { "UploadImage" })
+		"/instrutor/*", "/tables.jsp", "/upload.jsp", "/listAlunos.jsp" }, servletNames = { "UploadImage" })
 public class FilterAccessAdmin implements Filter {
 
 	/**

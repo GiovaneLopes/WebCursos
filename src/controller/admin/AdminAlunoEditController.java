@@ -50,7 +50,7 @@ public class AdminAlunoEditController extends HttpServlet {
 		aluno.setId(Integer.parseInt(request.getParameter("id")));
 		aluno.setNome(request.getParameter("nome"));
 		aluno.setEmail(request.getParameter("email"));
-		aluno.setSenha(request.getParameter("senha"));
+		aluno.setSenha((String) request.getAttribute("senha"));
 		aluno.setLogin(request.getParameter("login"));
 		aluno.setCpf(request.getParameter("cpf"));
 		aluno.setCelular(request.getParameter("celular"));

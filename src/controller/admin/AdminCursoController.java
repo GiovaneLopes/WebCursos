@@ -56,10 +56,17 @@ public class AdminCursoController extends HttpServlet {
 	}
 
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if(request.getParameter("id") == null || Integer.parseInt(request.getParameter("id"))== 0) {
+			response.sendError(400, "Id invalido");
+		}
 		Cursos curso = new Cursos();
 		curso.setId(Integer.parseInt(request.getParameter("id")));
 		CursosDAO cursoDAO = new CursosDAO();
-		cursoDAO.excluir(curso.getId());
+		if(cursoDAO.excluir(curso.getId()) == true) {
+			response.getWriter().write("{isSuccess: true}");
+		} else {
+			response.sendError(400, "Id invalido");
+		}
 	}
 
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

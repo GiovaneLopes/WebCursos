@@ -38,7 +38,7 @@ public class LoginController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		RequestDispatcher resposta = request.getRequestDispatcher("signin.html");
+		RequestDispatcher resposta = request.getRequestDispatcher("signin.jsp");
 		resposta.forward(request, response);
 	}
 
@@ -60,9 +60,12 @@ public class LoginController extends HttpServlet {
 			session.setAttribute("email", email);
 			session.setAttribute("tipoUser", tipoUser);
 			session.setAttribute("userId", resultado);
+			request.setAttribute("resultadoReq", true);
 		}else {
-			request.setAttribute("resultadoReq", resultado);
+			request.setAttribute("resultadoReq", false);
 		}
+		RequestDispatcher resposta = request.getRequestDispatcher("signin.jsp");
+		resposta.forward(request, response);
 	}
 	
 	public int doLogin(int tipoUser, String email, String senha) {
@@ -71,8 +74,10 @@ public class LoginController extends HttpServlet {
     			AlunosDAO aluno = new AlunosDAO();
     			Alunos resultAluno = aluno.getLogin(email, senha);
     			if(resultAluno.getNome() != null) {
+    				System.out.println("Sucesso no login");
     				return resultAluno.getId();
     			}
+    			System.out.println("Falha no login");
     			break;
     		case 2:
     			InstrutoresDAO instrutor = new InstrutoresDAO();

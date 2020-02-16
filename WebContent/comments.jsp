@@ -21,11 +21,11 @@
 		%>
 		<div class="card card-courses" style="width: 18rem;">
 			<%
-				File image = new File(System.getProperty("user.home") + "/fotos/alunos/" + alunos.get(i).getId());
+				File image = new File(System.getProperty("user.home") + "/fotos/alunos/" + alunos.get(i).getId() + ".png");
 					if (image.exists() && image.isFile()) {
 			%>
 			<img
-				src="<%=System.getProperty("user.home") + "/fotos/alunos/" + alunos.get(i).getId()%>"
+				src='<%=System.getProperty("user.home") + "/fotos/alunos/" + alunos.get(i).getId()  + ".png"%>'
 				class="card-img-top" alt="...">
 			<%
 				} else {
