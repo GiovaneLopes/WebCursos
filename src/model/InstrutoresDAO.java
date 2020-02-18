@@ -26,9 +26,7 @@ public class InstrutoresDAO {
 		try {
 			Statement stmt = conexao.createStatement();
 
-			ResultSet rs = stmt.executeQuery("SELECT instrutores.*, sum(cursos.carga_horaria) as ch_total "
-					+ "FROM instrutores " + "LEFT JOIN turmas " + "ON turmas.instrutores_id = instrutores.id "
-					+ "LEFT JOIN cursos " + "ON turmas.cursos_id = cursos.id");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM instrutores");
 
 			while (rs.next()) {
 				Instrutores instrutor = new Instrutores();
@@ -40,10 +38,6 @@ public class InstrutoresDAO {
 
 				if(rs.getString("valor_hora") != null) {
 					instrutor.setValor_hora(Integer.parseInt(rs.getString("valor_hora")));
-					if (rs.getString("ch_total") != null) {
-						int ch_total = Integer.parseInt(rs.getString("ch_total"));
-						instrutor.setValor_receber(ch_total * instrutor.getValor_hora());
-					}
 				}
 				
 				resultado.add(instrutor);

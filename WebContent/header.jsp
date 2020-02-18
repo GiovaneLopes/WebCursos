@@ -2,7 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%
 	int tipoUser = 0;
-	if (session.getAttribute("TipoUser") != null) {
+	if (session.getAttribute("tipoUser") != null) {
 		tipoUser = (int) session.getAttribute("tipoUser");
 	}
 %>

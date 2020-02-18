@@ -61,8 +61,6 @@
 						</li>
 						<li>Valor Hora: <%=instrutores.get(i).getValor_hora()%>
 						</li>
-						<li>Valor a receber: <%=instrutores.get(i).getValor_receber()%>
-						</li>
 					</ul>
 					<%
 						//if(session.getAttribute("tipoUser") != null && (int) session.getAttribute("tipoUser") == 3) {

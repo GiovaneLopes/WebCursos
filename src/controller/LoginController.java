@@ -72,10 +72,8 @@ public class LoginController extends HttpServlet {
     			AlunosDAO aluno = new AlunosDAO();
     			Alunos resultAluno = aluno.getLogin(login, senha);
     			if(resultAluno.getNome() != null) {
-    				System.out.println("Sucesso no login");
     				return resultAluno.getId();
     			}
-    			System.out.println("Falha no login");
     			break;
     		case 2:
     			InstrutoresDAO instrutor = new InstrutoresDAO();

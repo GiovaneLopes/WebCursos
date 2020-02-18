@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -73,6 +74,9 @@ public class AdminTurmaController extends HttpServlet {
 
 		TurmasDAO turmaDAO = new TurmasDAO();
 		boolean resultado = turmaDAO.gravar(turma);
+		request.setAttribute("resultadoReq", resultado);
+		RequestDispatcher resposta = request.getRequestDispatcher("tables.jsp");
+		resposta.forward(request, response);
 	}
 
 	@Override
